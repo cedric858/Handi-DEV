@@ -168,6 +168,7 @@
               <!-- /.col -->
 
             </div>
+          </div>
 <!--/.ROw indicateur-->
 <!--Row OPH-->
 <div class="row">
@@ -221,10 +222,8 @@
       <!--Card body-->
       <div class="card-body">
         
-        <div class="row" >
 
            <!--card association--> 
-           <div class="col-sm-12" >
              <div class="card card-primary">
                  <div class="card-header">
                       <h3 class="card-title">Nombre total d'OPH</h3>
@@ -233,31 +232,31 @@
                  <div class="card-body">
                    <div class="row">
                      <div class="col-sm-12 col-md-4">
-                      <i class="fas fa-hands-helping fa-7x"></i>
+                      
+                      <i class="fas fa-globe fa-7x"></i>
                      </div>
                      <div class="col-sm-12 col-md-8">
                        <h3>OPH</h3>
                        <p>
                          0
                        </p>
-                      <a href="{{route('ophs.index')}}" class="btn btn-primary">
-                        Voir les OPHs
-                      </a>
                      </div>
                    </div>
                   </div>
                  <!-- /.card-body -->
                  <div class="card-footer">
+                  <a href="{{route('ophs.index')}}" class="btn btn-primary">
+                    Voir les OPHs
+                  </a>
+
                  </div>
               <!-- /.card-footer -->
              </div>
-        </div>
          <!--/.Card Association-->
          <!--card ONG--> 
     <!--/.Card ONG-->
         <!-- /.card -->
        <!--/card info indicateur nbr handi -->
-      </div>
       <!--/.row-->
     </div>
       <!-- ./card-body -->
@@ -273,9 +272,230 @@
 
 </div>
 <!--/.ROW OPH-->
-<!--Row regions-->
+<!--row les régions-->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      Les régions, chefs-lieux, provinces, communes
+    </h3>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-wrench"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" role="menu">
+          <a href="#" class="dropdown-item">Action</a>
+          <a href="#" class="dropdown-item">Another action</a>
+          <a href="#" class="dropdown-item">Something else here</a>
+          <a class="dropdown-divider"></a>
+          <a href="#" class="dropdown-item">Separated link</a>
+        </div>
+      </div>
+    </div>
 
-<!--/.Row régions-->
+  </div>
+  <div class="card-body">
+    <!--Les region chef lieux -->
+    <div class="row">
+      <!--col région-->
+      <div class="col-sm-12 col-md-6 col-lg-3">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">
+              Les régions
+    
+            </h3>
+    
+          </div>
+          <div class="card-body">
+            0
+    
+          </div>
+          <div class="card-footer">
+          <a href="{{route('regions.index')}}" class="btn btn-primary">
+            Voir les régions
+          </a>
+    
+          </div>
+        </div>
+    
+      </div>
+      <!--/.col région-->
+      <!--col chef lieux-->
+      <div class="col-sm-12 col-md-6 col-lg-3">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">
+              Les chef-lieux
+    
+            </h3>
+    
+          </div>
+          <div class="card-body">
+            0
+    
+          </div>
+          <div class="card-footer">
+          <a href="{{route('cheflieus.index')}}" class="btn btn-primary">
+            Voir les chef-lieux
+          </a>
+    
+          </div>
+        </div>
+    
+      </div>
+      <!--/.col chef lieu-->
+      <!--col provinces-->
+      <div class="col-sm-12 col-md-6 col-lg-3">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">
+              Les provinces
+    
+            </h3>
+    
+          </div>
+          <div class="card-body">
+            0
+    
+          </div>
+          <div class="card-footer">
+          <a href="{{route('provinces.index')}}" class="btn btn-primary">
+            Voir les provinces
+          </a>
+    
+          </div>
+        </div>
+    
+      </div>
+      <!--/.col province-->
+      <!--col communes-->
+      <div class="col-sm-12 col-md-6 col-lg-3">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">
+              Les communes
+    
+            </h3>
+    
+          </div>
+          <div class="card-body">
+            0
+    
+          </div>
+          <div class="card-footer">
+          <a href="{{route('communes.index')}}" class="btn btn-primary">
+            Voir les communes
+          </a>
+    
+          </div>
+        </div>
+    
+      </div>
+      <!--/.col chef lieu-->
+      
+    </div>
+    <!--Les region chef lieux-->
+    <!--tableau-->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Région</th>
+          <th scope="col">Chef-lieux</th>
+          <th scope="col">Provinces</th>
+          <th scope="col">Communes</th>
+        </tr>
+        <?php
+        
+        
+        
 
+        ?>
+      </thead>
+      <tbody>
+        @forelse ($regions as $region)
+            <tr>
+              <th>
+                1
+
+              </th>
+              <td>
+                {{$region->libelle}}
+              </td>
+              <td>
+                <?php
+                  $cheflieux = $region->cheflieu;
+                  ?>
+                  {{ $cheflieux->libelle }}
+              </td>
+              <td>
+                <?php
+
+                $provinces = $cheflieux->provinces;
+                
+                  ?>
+                  @forelse($provinces as $province)
+                  {{ $province->libelle }}
+                  @empty
+                  <p>Pas de provinces</p>
+                  @endforelse
+                </td>
+              <td>
+                @forelse($provinces as $province)
+                  <?php
+                  $communes = $province->communes
+                  ?>
+
+                  @forelse($communes as $commune)
+                  {{ $commune->libelle }}
+                  @empty
+                  <p>Pas de communes</p>
+                  @endforelse
+
+
+                @empty
+                <p>Pas de communes</p>
+                @endforelse
+              </td>
+
+            </tr>
+            
+        @empty
+           <p>Rien à afficher</p>
+            
+        @endforelse
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+    <!--/.tableau-->
+
+  </div>
+  <div class="card-footer">
+
+  </div>
+</div>
+
+<!--/.row les régions -->
 
 @endsection
