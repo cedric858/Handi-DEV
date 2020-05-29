@@ -53,7 +53,9 @@ class RegionController extends Controller
      */
     public function show(Region $region)
     {
+        
         $item = Region::findOrFail($region)->first();
+        
         
         return view('handi-admin.adminregion.show',compact('item'));
     }

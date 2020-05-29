@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TypeHandicapRequest extends FormRequest
+class CommuneRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,7 @@ class TypeHandicapRequest extends FormRequest
     {
         return [
             'libelle'=>'required',
-            'description'=>'required'
-            
+            'province_id'=>'required'
         ];
     }
 }

@@ -3,7 +3,7 @@
     Liste des langues
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="admin/">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item active">Liste des langues</li>
 
 @endsection
@@ -21,7 +21,7 @@
             <h2 >Indication sur les langues parlées au Burkina Faso</h2>
             <p>La langue officielle du Burkina Faso est le français. Le nom même du pays est métissé de deux langues différentes : "burkina" en mooré veut dire "intègre" et "faso" en bambara signife "patrie", d'où son surnom de Pays des hommes intègres.
 Le nombre de peuples et d’ethnies au Burkina révèle le nombre de langues ou de dialectes pratiqués.Il existe tout de même plus de 60 langues et dialectes dont les principales sont: le mooré langue parlée par l’ethnie Mossi, le san parlé par les Samos, le fulfuldé parlé par les Peuls, le gulmancéma parlé par les Gourmantché dans l'Est du Burkina Faso, le dagara parlé par les Dagaris, le Dioula qui est une langue commune à plusieurs pays d’Afrique de l’ouest (la Côte d’Ivoire, le Mali, la Guinée etc…), le lobiri parlé par les lobis, le marka, le bobo, le bwamu parlé par les bwabas, le senoufo, le Toussian parlé par les Toussians, le kassena et le lyélé (langues parlées par le peuple dit Gourounsi qui en réalité s'appelle lui-même "NOUN", sud-est et centre ouest) et le bissa qui est la langue parlée par l’ethnie des Boussancé appelé couramment Bissas.</p>
-            <a href="{{route('langues.create')}}" class="btn btn-info" title="Ajouter une région"><i class="fas fa-plus"></i> Ajouter</a>
+            <a href="{{route('langues.create')}}" class="btn btn-info" title="Ajouter une langue"><i class="fas fa-plus"></i> Ajouter</a>
 
 
         </div>

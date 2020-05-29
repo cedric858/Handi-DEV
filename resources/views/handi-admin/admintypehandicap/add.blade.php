@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('header')
-    Liste des langue-Ajout
+    Liste des handicaps-Ajout
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="admin/">Accueil</a></li>
-    <li class="breadcrumb-item"><a href="{{route('langues.index')}}">Liste des langues</a></li>
-    <li class="breadcrumb-item active">Liste des langues-ajout</li>
+    <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="{{route('typehandicaps.index')}}">Liste des typehandicaps</a></li>
+    <li class="breadcrumb-item active">Liste des typehandicaps-ajout</li>
 
 @endsection
 
@@ -14,11 +14,11 @@
         <div class="col-md-8 col-offset-2">
             <div class="card">
                 <div class="card-header">
-                    <h3> <i class="fas fa-"></i> Nouvelle langue</h3>
+                    <h3> <i class="fas fa-"></i> Nouvel Handicap</h3>
 
                 </div>
                 <div class="card-body">
-                        <form action="{{route('langues.store')}}" method="post">
+                        <form action="{{route('typehandicaps.store')}}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="libelle">Libellé:</label> 
@@ -30,7 +30,25 @@
                                     </small>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary mb-2">Créer une langue</button>
+                            <!--Description-->
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                        
+                                <textarea aria-describedby="errordescription" name="description" class="form-control @error('description') is-invalid @enderror " id="" cols="30" rows="10">{{old('description')}}</textarea>
+                                @error('description')
+                                    <small class="form-text text-danger" id='errordescription'>
+                                        {{$errors->first('description')}}
+
+                                    </small>
+                                @enderror
+
+
+
+
+                            </div>
+
+                            <!--/.Description-->
+                            <button type="submit" class="btn btn-primary mb-2">Créer un handicap </button>
                         </form>
 
 

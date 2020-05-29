@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Province extends Model
 {
+    protected $fillable = ['libelle','cheflieu_id'];
+
     public function cheflieu()
     {
         return $this->belongsTo('App\Cheflieu');

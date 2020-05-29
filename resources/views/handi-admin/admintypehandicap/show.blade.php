@@ -3,7 +3,7 @@
     Détails type handicap
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="admin/">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item"><a href="admin/type handicap">Liste des type handicap</a></li>
     <li class="breadcrumb-item active">Détails type handicap</li>
 

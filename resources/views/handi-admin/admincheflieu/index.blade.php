@@ -3,7 +3,7 @@
     Liste des chefs-lieux
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="admin/">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item active">Liste des chefs-lieux</li>
 
 @endsection
@@ -48,11 +48,19 @@
 
         </div>
     </div>
-    {{$items->links()}}
+    <?php if(!isset($region))
+    {
+        ?>
+        {{$items->links()}}
+        <?php
+    } 
+    ?>
+    
     
     
 @forelse($items as $item)
 
+  
     <div class="card">
         <div class="card-header">
             <h4 class="">
@@ -86,11 +94,19 @@
     <span class="badge badge-danger">
                        Pas de chefs-lieux
     </span>
-                  <a href="{{route('cheflieus.create')}}" class="btn btn-info" title="Ajouter une région"><i class="fas fa-plus"></i>En créer</a>
+                  <a href="{{route('cheflieus.create')}}" class="btn btn-info" title="Ajouter un chef-lieu"><i class="fas fa-plus"></i>En créer</a>
 
 @endforelse
-{{$items->links()}}
-    
+<?php if(!isset($region))
+{
+    ?>
+    {{$items->links()}}
+
+    <?php
+} 
+
+?>
+
 
         
         

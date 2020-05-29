@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Region;
 use App\Cheflieu;
+use App\Region;
+use App\Http\Requests\CheflieuRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,8 +16,27 @@ class CheflieuController extends Controller
      */
     public function index()
     {
-        $items = Cheflieu::paginate(config('app.nbr_page'));
+        if(request('region'))
+        {
+            
+            $items =   Cheflieu::where('region_id',request('region'))->get()->sortBy("libelle");
+            $region = 1;
+            
+
+        }
+        else
+        {
+            $items = Cheflieu::orderBy("libelle")->paginate(config('app.nbr_page'));
+            
+
+        }
         $nbrItems = DB::table('cheflieus')->count();
+        if(isset($region))
+        {
+            return view('handi-admin.admincheflieu.index',compact('items','nbrItems','region'));
+
+
+        }
      return view('handi-admin.admincheflieu.index',compact('items','nbrItems'));
     }
 
@@ -28,7 +47,8 @@ class CheflieuController extends Controller
      */
     public function create()
     {
-        return view('handi-admin.adminregion.add');
+        return view('handi-admin.admincheflieu.add',['regions'=>Region::all()->sortBy("libelle")
+        ]);
     }
 
     /**
@@ -37,25 +57,23 @@ class CheflieuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CheflieuRequest $request)
     {
-        Region::create($request->validate([
-            'libelle'=>'required'
-        ]));
-        return redirect()->route('regions.index')->with('success','Région ajouté avec succès');
+        Cheflieu::create($request->validated());
+        return redirect()->route('cheflieus.index')->with('success','Chef-lieu ajouté avec succès');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cheflieu  cheflieu$cheflieu
+        * @param  \App\Cheflieu  $cheflieu
      * @return \Illuminate\Http\Response
      */
-    public function show(Cheflieu $cheflieu)
+    public function show(Cheflieu $cheflieus)
     {
-        $item = Region::findOrFail($cheflieu)->first();
+        $cheflieu =$cheflieus;
         
-        return view('handi-admin.admincheflieu.show',compact('item'));
+         return view('handi-admin.admincheflieu.show', compact('cheflieu'));
     }
 
     /**
@@ -64,11 +82,12 @@ class CheflieuController extends Controller
      * @param  \App\Cheflieu  $cheflieu
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cheflieu $cheflieu)
+    public function edit(Cheflieu $cheflieus)
     {
-        $item = Region::findOrFail($cheflieu)->first();
+        $cheflieu =$cheflieus;
+         $regions= Region::all()->sortBy("libelle");
         
-        return view('handi-admin.admincheflieu.edit',compact('item'));
+        return view('handi-admin.admincheflieu.edit',compact('cheflieu','regions'));
     }
 
     /**
@@ -78,16 +97,23 @@ class CheflieuController extends Controller
      * @param  \App\Cheflieu  $cheflieu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cheflieu $cheflieu)
+    public function update(CheflieuRequest $request, Cheflieu $cheflieus)
     {
-        $item = Region::find($region)->first();
-
-        $item->libelle = request('libelle');
+        $valid = $request->validated();
         
-        $item->save();
+        //return redirect()->route('cheflieus.index')->with('success','Chef-lieu ajouté avec succès');
+
+       // $item = Cheflieu::find($cheflieus)->first();
+
+        
+        $cheflieus->region_id = $valid['region_id']; 
+
+        $cheflieus->libelle = $valid['libelle'];
+        
+        $cheflieus->save();
         
         //$domaine->update($request->validated());
-        return redirect()->route('regions.index')->with('success','Région modifié avec succès');
+        return redirect()->route('cheflieus.index')->with('success','Chef lieu modifié avec succès');
     }
 
     /**
@@ -96,18 +122,18 @@ class CheflieuController extends Controller
      * @param  \App\Cheflieu  $cheflieu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cheflieu $cheflieu)
+    public function destroy(Cheflieu $cheflieus)
     {
-        $item = Region::find($region)->first();
-        if( $item->cheflieu()->count() > 0)
+        //$item = Region::find($cheflieus)->first();
+        if( $cheflieus->provinces->count() > 0)
         {
-            return redirect()->route('regions.index')
-            ->with('error','Veuillez supprimer d"abord le chef-lieu de cette région');
+            return redirect()->route('cheflieus.index')
+            ->with('error','Veuillez supprimer d"abord les provinces de ce chef lieu');
 
         }
 
-        $item->delete();
-        return redirect()->route('regions.index')->with('Success','Région supprimée avec succès');
+        $cheflieus->delete();
+        return redirect()->route('cheflieus.index')->with('Success','Chef lieu supprimé avec succès');
 
     }
 }

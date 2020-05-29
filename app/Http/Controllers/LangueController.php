@@ -18,7 +18,7 @@ class LangueController extends Controller
     {
         
 
-      $items = Langue::paginate(config('app.nbr_page'));
+      $items = Langue::orderBy("libelle")->paginate(config('app.nbr_page'));
       $nbrItems = DB::table('langues')->count();
    return view('handi-admin.adminlangue.index',compact('items','nbrItems'));    }
 

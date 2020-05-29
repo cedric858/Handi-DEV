@@ -3,7 +3,7 @@
     Liste des régions
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="admin/">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item active">Liste des Régions</li>
 
 @endsection
@@ -64,6 +64,7 @@
             <div class="row ">
                 <div class="col-sm-4 bg-success">
                     <p>Nombre de chef lieux: {{$item->cheflieu()->count()}}</p> 
+                <a href="{{route('cheflieus.index',['region'=>$item->id])}}" class="btn btn-info mb-3">Voir chef-lieu <i class="fas fa-arrow-right"></i></a>
                  </div>
                 <div class="col-sm-8">
                     <a href="{{route('regions.show',$item->id)}}" 

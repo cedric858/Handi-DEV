@@ -185,7 +185,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/admin/accueil" class="brand-link">
+    <a href="/admin" class="brand-link">
       <img src="/bower_components/admin-lte/dist/img/AdminLTELogo.png" alt="Handidata Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">{{config('app.name')}}</span>
@@ -454,7 +454,7 @@
           </li>
 -->
 <!--Indicateurs-->
-{{$indicateurs = App\Indicateur::all()}}
+<?php $indicateurs = App\Indicateur::all() ?>
 
           <li class="nav-header">
               LES INDICATEURS
@@ -525,7 +525,7 @@
 
           </li>
           <li class="nav-item">
-              <a href="{{route('ophs.index')}}" class="nav-link">
+              <a href="{{route('ophs.index')}}" title="Afficher tous les OPH" class="nav-link">
                   <i class="nav-icon fas fa-eye"></i>
                   <p>
                     Voir
@@ -533,7 +533,7 @@
                 </a>
              </li>
              <li class="nav-item">
-                    <a href="{{route('ophs.create')}}" class="nav-link" title="Ajouter indicateur">
+                    <a href="{{route('ophs.create')}}" class="nav-link" title="Ajouter OPH">
                         <i class="fas fa-plus"></i>
                         <p >
                             Ajouter OPH
@@ -603,6 +603,27 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('cheflieus.index')}}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Gérer les chef-lieux</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('provinces.index')}}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Gérer les provinces</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('communes.index')}}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Gérer les Communes</p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
             <a href="{{route('langues.index')}}" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>Gérer les langues</p>
@@ -640,7 +661,7 @@
       <div class="container-fluid">
           @yield('content')
 
-        <div class="row">
+        {{-- <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
@@ -1398,7 +1419,7 @@
           </div>
           <!-- /.col -->
         </div>
-        <!-- /.row -->
+        <!-- /.row --> --}}
       </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->

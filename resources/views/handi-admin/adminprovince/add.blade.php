@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('header')
-    Liste des chefs lieux-Ajout
+    Liste des provinces-ajout
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
-    <li class="breadcrumb-item"><a href="{{route('cheflieus.index')}}">Liste des chefs-lieux</a></li>
-    <li class="breadcrumb-item active">Liste des chefs lieux-ajout</li>
+    <li class="breadcrumb-item"><a href="{{route('provinces.index')}}">Liste des provinces</a></li>
+    <li class="breadcrumb-item active">Liste des provinces-ajout</li>
 
 @endsection
 
@@ -14,23 +14,23 @@
         <div class="col-md-8 col-offset-2">
             <div class="card">
                 <div class="card-header">
-                    <h3> <i class="fas fa-"></i> Nouveau chefs-lieux</h3>
+                    <h3> <i class="fas fa-"></i> Nouveau provinces</h3>
 
                 </div>
                 <div class="card-body">
-                        <form action="{{route('cheflieus.store')}}" method="post">
+                        <form action="{{route('provinces.store')}}" method="post">
                             @csrf
-                                                        <!--Région-->
+                                                        <!--Chef-lieu-->
         <div class="form-group">
-            <label for="region_id">Régions <span class="text text-danger">*</span> </label>
-            <select class="form-control" id="region_id" name="region_id">
+            <label for="cheflieu_id">Chef-lieu <span class="text text-danger">*</span> </label>
+            <select class="form-control" id="cheflieu_id" name="cheflieu_id">
 
            
-                @forelse ($regions as $region)
-                    <option value="{{$region->id}}">{{$region->libelle}}</option>
+                @forelse ($cheflieus as $cheflieu)
+                    <option value="{{$cheflieu->id}}">{{$cheflieu->libelle}}</option>
                     
                 @empty
-                    <p>Pas de régions</p>
+                    <p>Pas de chef-lieu</p>
                     
                 @endforelse 
             </select>
@@ -38,14 +38,14 @@
                     
                
               
-              @error('region_id')
+              @error('cheflieu_id')
             <p class="help is-danger">{{$message}}</p>
                 
                   
               @enderror
                   
           </div>
-<!--Région-->
+
 
 <!--/.Chef lieu-->
 
@@ -59,7 +59,7 @@
                                     </small>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary mb-2">Créer un chef-lieu</button>
+                            <button type="submit" class="btn btn-primary mb-2">Créer une province</button>
                         </form>
 
 

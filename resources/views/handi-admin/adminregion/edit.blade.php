@@ -3,7 +3,7 @@
     Détails régions
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="admin/">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item"><a href="{{route('regions.index')}}">Liste des régions</a></li>
     <li class="breadcrumb-item active">Détails de la région</li>
 

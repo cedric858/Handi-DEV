@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('header')
-    Liste des handicaps
+    Liste des   provinces
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
-    <li class="breadcrumb-item active">Liste des handicaps</li>
+    <li class="breadcrumb-item active">Liste des   provinces</li>
 
 @endsection
 
@@ -12,15 +12,16 @@
  <div class="row no-gutters">
         <div class="col-sm-12 col-md-4 bg-gradient-primary">
             <h3>
-                Nombre de handicaps: {{$nbrItems}}
+                Nombre de   provinces: {{$nbrItems}}
             </h3>
 
 
         </div>
         <div class="col-sm-12 col-md-8 pl-3">
-            <h2 >Indication sur les types de handicaps</h2>
-            <p>Selon la définition de l’Organisation Mondiale de la Santé (OMS), « est handicapée toute personne dont l’intégrité physique ou mentale est passagèrement ou définitivement diminuée, soit congénitalement, soit sous l’effet de l’âge ou d’un accident, en sorte que son autonomie, son aptitude à fréquenter l’école ou à occuper un emploi s’en trouvent compromises ».On peut en répertorier en plusieurs types</p>
-            <a href="{{route('typehandicaps.create')}}" class="btn btn-info" title="Ajouter une région"><i class="fas fa-plus"></i> Ajouter</a>
+            <h2 >Indication sur les   provinces du Burkina Faso</h2>
+            <p>Les provinces du Burkina Faso sont subdivisées en communes. Nous avons des communes rurales et des communes urbaines.</p>
+            <p>Les province font également partie des Chef lieux</p>
+            <a href="{{route('provinces.create')}}" class="btn btn-info" title="Ajouter une   province"><i class="fas fa-plus"></i> En créer</a>
 
 
         </div>
@@ -31,7 +32,7 @@
     <div class="row">
         <div class="col-sm-12 mt-3">
             <h3>
-                Liste des handicaps
+                Liste des   provinces
             </h3>
             @if ($message = Session::get('success'))
               <div class="alert alert-success alert-block">
@@ -48,11 +49,19 @@
 
         </div>
     </div>
-    {{$items->links()}}
+    <?php if(!isset($cheflieu))
+    {
+        ?>
+        {{$items->links()}}
+        <?php
+    } 
+    ?>
+    
     
     
 @forelse($items as $item)
 
+  
     <div class="card">
         <div class="card-header">
             <h4 class="">
@@ -62,12 +71,15 @@
         </div>
         <div class="card-body" >
             <div class="row ">
+                <div class="col-sm-4 bg-success">
+                    <p>Nombre de communes dans cette province: {{$item->communes()->count()}}</p> 
+                 </div>
                 <div class="col-sm-8">
-                    <a href="{{route('typehandicaps.show',$item->id)}}" 
+                    <a href="{{route('provinces.show',$item->id)}}" 
                         class="btn btn-info" 
                         title="Voir détails"><i class="fas fa-eye"></i> Voir détails</a>
-                    <a href="{{route('typehandicaps.edit',$item->id)}}" class="btn btn-warning" title="Modifier"><i class="fas fa-pencil"></i> Modifier</a>
-                    <form action="{{route('typehandicaps.destroy',$item->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
+                    <a href="{{route('provinces.edit',$item->id)}}" class="btn btn-warning" title="Modifier"><i class="fas fa-pencil"></i> Modifier</a>
+                    <form action="{{route('provinces.destroy',$item->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
                                                 {{csrf_field()}}
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button class="btn btn-danger">Supprimer</button>
@@ -81,13 +93,21 @@
         
         @empty
     <span class="badge badge-danger">
-                       Pas de handicaps
+                       Pas de   provinces
     </span>
-                  <a href="{{route('typehandicaps.create')}}" class="btn btn-info" title="Ajouter une région"><i class="fas fa-plus"></i>En créer</a>
+                  <a href="{{route('provinces.create')}}" class="btn btn-info" title="Ajouter un chef-lieu"><i class="fas fa-plus"></i>En créer</a>
 
 @endforelse
-{{$items->links()}}
-    
+<?php if(!isset($cheflieu))
+{
+    ?>
+    {{$items->links()}}
+
+    <?php
+} 
+
+?>
+
 
         
         

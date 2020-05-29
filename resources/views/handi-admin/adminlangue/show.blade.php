@@ -3,8 +3,8 @@
     Détails langue
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="">Accueil</a></li>
-    <li class="breadcrumb-item"><a href="admin/langues">Liste des langues</a></li>
+    <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="{{route('langues.index')}}">Liste des langues</a></li>
     <li class="breadcrumb-item active">Détails langue</li>
 
 @endsection

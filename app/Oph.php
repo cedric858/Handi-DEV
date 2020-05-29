@@ -6,6 +6,35 @@ use Illuminate\Database\Eloquent\Model;
 
 class Oph extends Model
 {
+    protected $fillable = ['nom','prenom','sexe','phone','profession',
+'nomOph',
+'sigle',
+'missionObjectif',
+'telephoneOph',
+'type_handicap_id',
+'domaine_id',
+'dateCreation',
+'activite',
+'beneficiaire',
+'sourceFinancement',
+'partenaire',
+'nbrAdherantHomme',
+'nbrAdherantFemme',
+'nbrMembreHomme',
+'nbrMembreFemme',
+'nbrMembreAlphabetise',
+'nbrMembreScolarise',
+'structure',
+'langue_id',
+'region_id',
+'province_id',
+'commune_id',
+'zoneInt',
+'numbRecipisse',
+'statut',
+'type'];
+
+
     public function responsable()
     {
         return $this->belongsTo('App\Responsable');
@@ -29,11 +58,11 @@ class Oph extends Model
     }
     public function langues()
     {
-        return $this->belongsToMany('App\Lanque');
+        return $this->belongsToMany('App\Lanque')->withTimestamps();
     }
     public function type_handicaps()
     {
-        return $this->belongsToMany('App\TypeHandicap','oph_type_handicap','oph_id','type_handicap_id');
+        return $this->belongsToMany('App\TypeHandicap','oph_type_handicap','oph_id','type_handicap_id')->withTimestamps();
     }
 
     

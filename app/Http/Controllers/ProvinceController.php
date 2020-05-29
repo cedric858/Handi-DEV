@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Cheflieu;
+use App\Http\Requests\ProvinceRequest;
 use App\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProvinceController extends Controller
 {
@@ -14,7 +17,34 @@ class ProvinceController extends Controller
      */
     public function index()
     {
-        //
+        $nbrItems = DB::table('provinces')->count();
+        if(request('cheflieu'))
+        {
+            
+            $items =   Province::where('cheflieu_id',request('cheflieu'))->get()->sortBy("libelle");
+            $cheflieu = 1;
+            
+
+        }
+        else
+        {
+            $items = Province::orderBy("libelle")->paginate(config('app.nbr_page'));
+            
+
+        }
+        
+        if(isset($cheflieu))
+        {
+            
+            return view('handi-admin.adminprovinces.index',compact('items','nbrItems','region'));
+
+
+        }
+
+
+        //////////////////////////////////////////////
+     return view('handi-admin.adminprovince.index',compact('items','nbrItems'));
+        
     }
 
     /**
@@ -24,7 +54,10 @@ class ProvinceController extends Controller
      */
     public function create()
     {
-        //
+        
+
+        return view('handi-admin.adminprovince.add',['cheflieus'=>Cheflieu::all()->sortBy("libelle")
+        ]);
     }
 
     /**
@@ -33,9 +66,10 @@ class ProvinceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProvinceRequest $request)
     {
-        //
+        Province::create($request->validated());
+        return redirect()->route('provinces.index')->with('success','Province ajoutée avec succès');
     }
 
     /**
@@ -46,7 +80,8 @@ class ProvinceController extends Controller
      */
     public function show(Province $province)
     {
-        //
+        
+         return view('handi-admin.adminprovince.show', compact('province'));
     }
 
     /**
@@ -57,7 +92,10 @@ class ProvinceController extends Controller
      */
     public function edit(Province $province)
     {
-        //
+       
+         $cheflieus= Cheflieu::all()->sortBy("libelle");
+        
+        return view('handi-admin.adminprovince.edit',compact('province','cheflieus'));
     }
 
     /**
@@ -67,9 +105,23 @@ class ProvinceController extends Controller
      * @param  \App\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Province $province)
+    public function update(ProvinceRequest $request, Province $province)
     {
-        //
+        $valid = $request->validated();
+        
+        //return redirect()->route('cheflieus.index')->with('success','Chef-lieu ajouté avec succès');
+
+       // $item = Cheflieu::find($cheflieus)->first();
+
+        
+        $province->cheflieu_id = $valid['cheflieu_id']; 
+
+        $province->libelle = $valid['libelle'];
+        
+        $province->save();
+        
+        //$domaine->update($request->validated());
+        return redirect()->route('provinces.index')->with('success','Province modifiée avec succès');
     }
 
     /**
@@ -80,6 +132,16 @@ class ProvinceController extends Controller
      */
     public function destroy(Province $province)
     {
-        //
+        //$item = Region::find($cheflieus)->first();
+        if( $province->communes->count() > 0)
+        {
+            return redirect()->route('provinces.index')
+            ->with('error','Veuillez supprimer d"abord les communes de cette province');
+
+        }
+        
+
+        $province->delete();
+        return redirect()->route('provinces.index')->with('Success','province supprimée avec succès');
     }
 }

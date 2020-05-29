@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cheflieu extends Model
 {
+    protected $table = 'cheflieus';
     protected $fillable = ['libelle','region_id'];
     public function region()
     {

@@ -16,7 +16,7 @@ class TypeHandicapController extends Controller
      */
     public function index()
     {
-        $items = TypeHandicap::paginate(config('app.nbr_page'));
+        $items = TypeHandicap::orderBy("libelle")->paginate(config('app.nbr_page'));
         $nbrItems = DB::table('type_handicaps')->count();
      return view('handi-admin.admintypehandicap.index',compact('items','nbrItems'));    
       }
@@ -28,7 +28,7 @@ class TypeHandicapController extends Controller
      */
     public function create()
     {
-        return view('handi-admin.adminlangue.add');
+        return view('handi-admin.admintypehandicap.add');
     }
 
     /**
@@ -39,6 +39,7 @@ class TypeHandicapController extends Controller
      */
     public function store(TypeHandicapRequest $request)
     {
+        
         TypeHandicap::create($request->validated());
         return redirect()->route('typehandicaps.index')->with('success','Type de handicap  ajouté avec succès');
     }
