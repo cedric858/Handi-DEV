@@ -5,7 +5,7 @@
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item"><a href="admin/domaines">Liste des domaines</a></li>
-    <li class="breadcrumb-item active"><a href="admin/domaines">Liste des domaines-ajout</a></li>
+    <li class="breadcrumb-item active">Liste des domaines-ajout</li>
 
 @endsection
 
@@ -22,7 +22,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="libelle">Libellé:</label> 
-                                <input aria-describedby="errorlibelle" type="text" class="form-control @error('libelle') is-invalid @enderror " name="libelle" value="{{old('libelle')}}">
+                                <input aria-describedby="errorlibelle" type="text" class="form-control @error('libelle') is-invalid @enderror " name="libelle" value="{{old('libelle')}}" required>
                                 @error('libelle')
                                     <small class="form-text text-danger" id='errorlibelle'>
                                         {{$errors->first('libelle')}}
@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label for="description">Description</label>
                         
-                                <textarea aria-describedby="errordescription" name="description" class="form-control @error('libelle') is-invalid @enderror " id="" cols="30" rows="10">{{old('description')}}</textarea>
+                                <textarea aria-describedby="errordescription" name="description" class="form-control @error('libelle') is-invalid @enderror " id="description" cols="30" rows="10">{{old('description')}}</textarea>
                                 @error('description')
                                     <small class="form-text text-danger" id='errordescription'>
                                         {{$errors->first('description')}}

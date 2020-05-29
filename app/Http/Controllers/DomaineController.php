@@ -19,7 +19,7 @@ class DomaineController extends Controller
         //1 Nombre d'indicateur 
         
 
-        $items = Domaine::paginate(config('app.nbr_page'));
+        $items = Domaine::orderBy("libelle")->paginate(config('app.nbr_page'));
         $nbrItems = DB::table('domaines')->count();
      return view('handi-admin.admindomaine.index',compact('items','nbrItems'));
     }
@@ -83,10 +83,12 @@ class DomaineController extends Controller
     public function update(DomaineRequest $request, Domaine $domaine)
     {
         
+        
         $ledomaine = Domaine::find($domaine)->first();
+       $validatedDomaines = $request->validated();
 
-        $ledomaine->libelle = request('libelle');
-        $ledomaine->description = request('description');
+       $ledomaine->libelle = $validatedDomaines['libelle'];
+        $ledomaine->description = $validatedDomaines['description'];
         $ledomaine->save();
         
         //$domaine->update($request->validated());
@@ -110,7 +112,7 @@ class DomaineController extends Controller
         }
 
         $ledomaine->delete();
-        return redirect()->route('domaines.index')->with('Success','Domaine supprimé avec succès');
+        return redirect()->route('domaines.index')->with('success','Domaine supprimé avec succès');
 
 
     }

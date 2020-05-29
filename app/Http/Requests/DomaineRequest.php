@@ -24,7 +24,8 @@ class DomaineRequest extends FormRequest
     public function rules()
     {
         return [
-            'libelle'=>'required'
+            'libelle'=>'required',
+            'description' => 'string|max:2000|nullable'
         ];
     }
 }

@@ -16,7 +16,11 @@ class RegionController extends Controller
      */
     public function index()
     {
-        $items = Region::paginate(config('app.nbr_page'));
+        
+
+        ///////////////////////////
+
+        $items = Region::orderBy("libelle")->paginate(config('app.nbr_page'));
         $nbrItems = DB::table('regions')->count();
      return view('handi-admin.adminregion.index',compact('items','nbrItems'));
     }

@@ -6,12 +6,20 @@
     <li class="breadcrumb-item"><a href="/">Accueil</a></li>
     @endsection
 @section('content')
+
+<?php
+$increment = 1;
+$increment1 = 1;
+$increment2 = 1;
+?>
+
 <!--Row-->
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <h5 class="card-title">Les indicateurs</h5>
+                    <h5 class="card-title">Les indicateurs: <span class="badge badge-info">{{$indicateurs->count()}}</span> </h5>
+                  
     
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -22,11 +30,8 @@
                           <i class="fas fa-wrench"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" role="menu">
-                          <a href="#" class="dropdown-item">Action</a>
-                          <a href="#" class="dropdown-item">Another action</a>
-                          <a href="#" class="dropdown-item">Something else here</a>
-                          <a class="dropdown-divider"></a>
-                          <a href="#" class="dropdown-item">Separated link</a>
+                          <a href="{{route('indicateurs.index')}}" class="dropdown-item">Voir les indicateurs</a>
+                          <a href="{{route('indicateurs.create')}}" class="dropdown-item">Ajouter un indicateur</a>
                         </div>
                       </div>
                       <div class="btn-group">
@@ -175,7 +180,7 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header">
-        <h5 class="card-title">Les Organisations de Personnes Handicapées(OPH)</h5>
+        <h5 class="card-title">Les Organisations de Personnes Handicapées(OPH) : <span class="badge badge-info">{{$ophs->count()}}</span> </h5>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -186,11 +191,9 @@
               <i class="fas fa-wrench"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
-              <a href="#" class="dropdown-item">Action</a>
-              <a href="#" class="dropdown-item">Another action</a>
-              <a href="#" class="dropdown-item">Something else here</a>
-              <a class="dropdown-divider"></a>
-              <a href="#" class="dropdown-item">Separated link</a>
+              <a href="{{route('ophs.index')}}" class="dropdown-item">Voir les OPHs</a>
+              <a href="{{route('ophs.create')}}" class="dropdown-item">Ajouter une OPH </a>
+              
             </div>
           </div>
           <div class="btn-group">
@@ -287,11 +290,11 @@
           <i class="fas fa-wrench"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-right" role="menu">
-          <a href="#" class="dropdown-item">Action</a>
-          <a href="#" class="dropdown-item">Another action</a>
-          <a href="#" class="dropdown-item">Something else here</a>
-          <a class="dropdown-divider"></a>
-          <a href="#" class="dropdown-item">Separated link</a>
+          <a href="{{route('regions.index')}}" class="dropdown-item">Aller aux régions</a>
+          <a href="{{route('cheflieus.index')}}" class="dropdown-item">Aller aux chefs lieux</a>
+          <a href="{{route('provinces.index')}}" class="dropdown-item">Aller aux provinces</a>
+          <a href="{{route('communes.index')}}" class="dropdown-item">Aller aux communes</a>
+          
         </div>
       </div>
     </div>
@@ -311,7 +314,12 @@
     
           </div>
           <div class="card-body">
-            0
+
+            <h2>
+              {{ $regions->count() }}
+
+
+            </h2>
     
           </div>
           <div class="card-footer">
@@ -335,7 +343,11 @@
     
           </div>
           <div class="card-body">
-            0
+            <h2>
+              {{ $cheflies->count() }}
+
+
+            </h2>
     
           </div>
           <div class="card-footer">
@@ -359,7 +371,12 @@
     
           </div>
           <div class="card-body">
-            0
+            <h2>
+              {{ $provinces->count() }}
+
+
+            </h2>
+
     
           </div>
           <div class="card-footer">
@@ -383,7 +400,12 @@
     
           </div>
           <div class="card-body">
-            0
+            <h2>
+              {{ $communes->count() }}
+
+
+            </h2>
+
     
           </div>
           <div class="card-footer">
@@ -420,7 +442,7 @@
         @forelse ($regions as $region)
             <tr>
               <th>
-                1
+                {{$increment}}
 
               </th>
               <td>
@@ -439,10 +461,13 @@
                 
                   ?>
                   @forelse($provinces as $province)
-                  {{ $province->libelle }}
+                  {{ $province->libelle }} <br>
                   @empty
                   <p>Pas de provinces</p>
                   @endforelse
+                  
+                  
+
                 </td>
               <td>
                 @forelse($provinces as $province)
@@ -451,41 +476,30 @@
                   ?>
 
                   @forelse($communes as $commune)
-                  {{ $commune->libelle }}
+                  {{ $commune->libelle }} --> {{ $commune->province->libelle }} 
+                  <br>
                   @empty
                   <p>Pas de communes</p>
                   @endforelse
 
+                  
 
                 @empty
-                <p>Pas de communes</p>
+                <p>Pas de province</p>
                 @endforelse
               </td>
 
+
             </tr>
+            <?php
+            $increment +=1; 
+            ?>
             
         @empty
-           <p>Rien à afficher</p>
+           <p>Pas de région</p>
             
         @endforelse
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
+       
       </tbody>
     </table>
     <!--/.tableau-->
@@ -497,5 +511,199 @@
 </div>
 
 <!--/.row les régions -->
+<!--row les handicaps-->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      Les différent types de handicaps: <span class="badge badge-info">{{$handicaps->count()}}</span>
+    </h3>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-wrench"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" role="menu">
+          <a href="{{route('typehandicaps.index')}}" class="dropdown-item">Voir les types de handicap</a>
+          <a href="{{route('typehandicaps.create')}}" class="dropdown-item">Ajouter un type de handicap</a>
+         
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <!--tableau-->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Libellé du handicap</th>
+          <th scope="col">description</th>
+          <th scope="col">Action</th>
+        </tr>
+        <?php
+        
+        
+        
+
+        ?>
+      </thead>
+      <tbody>
+        @forelse ($handicaps as $handicap)
+            <tr>
+              <th>
+                {{$increment1}}
+
+              </th>
+              <td>
+                {{$handicap->libelle}}
+              </td>
+              <td>
+                
+                  {{ $handicap->description }}
+              </td>
+              <td>
+
+                <a href="{{route('typehandicaps.show',$handicap->id)}}" class="btn btn-info">
+                  Voir détails
+                </a>
+                <a href="{{route('typehandicaps.edit',$handicap->id)}}" class="btn btn-warning">
+                  Modifier
+                </a>
+                <form action="{{route('typehandicaps.destroy',$handicap->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
+                  {{csrf_field()}}
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="btn btn-danger">Supprimer</button>
+
+              </form>
+  
+              </td>
+              
+
+
+            </tr>
+            <?php
+            $increment1 +=1; 
+            ?>
+            
+        @empty
+           <p>Pas de région</p>
+            
+        @endforelse
+       
+      </tbody>
+    </table>
+    <!--/.tableau-->
+
+  </div>
+  <div class="card-footer">
+
+  </div>
+</div>
+
+<!--/.row les handicaps-->
+<!--Row les langues-->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      Les différents langues parlées au burkina faso: <span class="badge badge-info">{{$langues->count()}}</span>
+    </h3>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-wrench"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" role="menu">
+          <a href="{{route('langues.index')}}" class="dropdown-item">Voir toutes les langues</a>
+          <a href="{{route('langues.create')}}" class="dropdown-item">Ajouter une langue</a>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <!--tableau-->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Libellé du handicap</th>
+          <th scope="col">description</th>
+          <th scope="col">Action</th>
+        </tr>
+        <?php
+        
+        
+        
+
+        ?>
+      </thead>
+      <tbody>
+        @forelse ($langues as $langue)
+            <tr>
+              <th>
+                {{$increment2}}
+
+              </th>
+              <td>
+                {{$langue->libelle}}
+              </td>
+              <td>
+                  @if ($langue->description)
+                  {{$langue->description}}
+                      
+                  @else
+                  <p>Pas de description</p>
+                      
+                  @endif
+                  
+              </td>
+              <td>
+                <a href="{{route('langues.show',$handicap->id)}}" class="btn btn-info">
+                  Voir détails
+                </a>
+                <a href="{{route('langues.edit',$handicap->id)}}" class="btn btn-warning">
+                  Modifier
+                </a>
+                <form action="{{route('langues.destroy',$handicap->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
+                  {{csrf_field()}}
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="btn btn-danger">Supprimer</button>
+
+              </form>
+              </td>
+
+              
+
+
+            </tr>
+            <?php
+            $increment2 +=1; 
+            ?>
+            
+        @empty
+           <p>Pas de région</p>
+            
+        @endforelse
+       
+      </tbody>
+    </table>
+    <!--/.tableau-->
+
+  </div>
+  <div class="card-footer">
+
+  </div>
+</div>
+
+
+<!--/.Row les langues-->
 
 @endsection
