@@ -487,9 +487,6 @@ $increment2 = 1;
           <th scope="col">Communes</th>
         </tr>
         <?php
-        
-        
-        
 
         ?>
       </thead>
@@ -503,46 +500,58 @@ $increment2 = 1;
               <td>
                 {{$region->libelle}}
               </td>
-              <td>
+              
                 <?php
                   $cheflieux = $region->cheflieu;
                   ?>
+                  @if ( $region->cheflieu !== null)
+                  <?php 
+                  $cheflieux = $region->cheflieu;
+                  ?>
+                  <td>
                   {{ $cheflieux->libelle }}
-              </td>
-              <td>
-                <?php
-
-                $provinces = $cheflieux->provinces;
-                
-                  ?>
-                  @forelse($provinces as $province)
-                  {{ $province->libelle }} <br>
-                  @empty
-                  <p>Pas de provinces</p>
-                  @endforelse
-                  
-                  
-
                 </td>
-              <td>
-                @forelse($provinces as $province)
+                <td>
                   <?php
-                  $communes = $province->communes
+                     $provinces = $cheflieux->provinces;
                   ?>
-
-                  @forelse($communes as $commune)
-                  {{ $commune->libelle }} --> {{ $commune->province->libelle }} 
-                  <br>
+                    @forelse($provinces as $province)
+                    {{ $province->libelle }} <br>
+                    @empty
+                    <p>Pas de provinces</p>
+                    @endforelse
+                  </td>
+                <td>
+                  @forelse($provinces as $province)
+                    <?php
+                    $communes = $province->communes
+                    ?>
+  
+                    @forelse($communes as $commune)
+                    {{ $commune->libelle }} --> {{ $commune->province->libelle }} 
+                    <br>
+                    @empty
+                    <p>Pas de communes</p>
+                    @endforelse
+  
+                    
+  
                   @empty
-                  <p>Pas de communes</p>
+                  <p>Pas de province</p>
                   @endforelse
-
+                </td>
+                  @else
+                  <td>
+                    <p>Pas de chef-lieu, province, commune pour cette région</p>
+                    
+                  </td>
                   
-
-                @empty
-                <p>Pas de province</p>
-                @endforelse
-              </td>
+                      
+                  @endif
+                  
+                  
+              
+              
 
 
             </tr>

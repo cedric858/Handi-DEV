@@ -19,7 +19,7 @@ class AdminController extends Controller
     {
         $indicateurs = Indicateur::all();
         $domaines = Domaine::all()->sortBy("libelle");
-        $regions = Region::all()->sortBy("libelle");;
+        $regions = Region::all()->sortBy("libelle");
         $ophs = Oph::all();
         $cheflies = Cheflieu::all();
         $provinces = Province::all();

@@ -463,7 +463,7 @@
         
         
        <!--/.Nom du responsable-->
-       <!--Nom du responsable-->
+       <!--Prénom du responsable-->
               <div class="form-group">
                 <label for="prenom">Prénom <span class="text text-danger">*</span> </label>
                 <input  required aria-describedby="errorPrenom" type="text" class="form-control @error('prenom') is-invalid @enderror " name="prenom" value="{{old('prenom',"K. Roger")}}" placeholder="Prénom  responsable">
@@ -477,7 +477,7 @@
               </div>
     
     
-   <!--/.Nom du responsable-->
+   <!--/.Prénom du responsable-->
    <!--Téléphone-->
           <div class="form-group">
             <label for="phone">Téléphone <span class="text text-danger">*</span> </label>
@@ -525,8 +525,6 @@
     @enderror
 
       </div>
-
-
 <!--/.Profession-->
     </div>
     <!--Responsable de la structure-->
@@ -575,6 +573,7 @@
 @enderror
 
   </div>
+  <!--/.Type d'OPH-->
     </div>
     <!--/.Informations juriques-->
     
