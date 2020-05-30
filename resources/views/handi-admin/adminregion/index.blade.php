@@ -55,7 +55,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h4 class="">
+            <h4 class="card-title">
                 {{$item->libelle}}
             </h4>
 

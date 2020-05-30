@@ -12,7 +12,7 @@
 @section('content')
 <div class="card">
         <div class="card-header">
-            <h4 class="">
+            <h4 class="card-title">
                 {{$province->libelle}}
                           </h4>
 

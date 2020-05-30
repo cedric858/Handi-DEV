@@ -9,6 +9,7 @@
 
 <?php
 $increment = 1;
+$increment0 = 1;
 $increment1 = 1;
 $increment2 = 1;
 ?>
@@ -34,29 +35,7 @@ $increment2 = 1;
                           <a href="{{route('indicateurs.create')}}" class="dropdown-item">Ajouter un indicateur</a>
                         </div>
                       </div>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                          <i class="fas fa-exclamation-circle"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" role="menu">
-                          <div class="card bg-primary">
-                            <div class="card-header">
-                              <h3 class="card-title">
-                                Information sur les indicateurs
-                              </h3>
-
-                            </div>
-                            <div class="card-body">
-                              <p>
-                                Un indicateur est un outil d'évaluation et d'aide à la décision.
-                              </p>
-                              
-
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      
                     </div>
                   </div>
                   <!-- /.card-header -->
@@ -175,6 +154,106 @@ $increment2 = 1;
             </div>
           </div>
 <!--/.ROw indicateur-->
+
+<!--Row les domaines-->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      Les différents domaines: <span class="badge badge-info">{{$domaines->count()}}</span>
+    </h3>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-wrench"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" role="menu">
+          <a href="{{route('domaines.index')}}" class="dropdown-item">Voir tous les domaine</a>
+          <a href="{{route('domaines.create')}}" class="dropdown-item">Ajouter un domaine</a>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <!--tableau-->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Libellé du domaine</th>
+          <th scope="col">description</th>
+          <th scope="col">Action</th>
+        </tr>
+        <?php
+        
+        
+        
+
+        ?>
+      </thead>
+      <tbody>
+        @forelse ($domaines as $domaine)
+            <tr>
+              <th>
+                {{$increment0}}
+
+              </th>
+              <td>
+                {{$domaine->libelle}}
+              </td>
+              <td>
+                  @if ($domaine->description)
+                  {{$domaine->description}}
+                      
+                  @else
+                  <p>Pas de description</p>
+                      
+                  @endif
+                  
+              </td>
+              <td>
+                <a href="{{route('domaines.show',$domaine->id)}}" class="btn btn-info">
+                  Voir détails
+                </a>
+                <a href="{{route('domaines.edit',$domaine->id)}}" class="btn btn-warning">
+                  Modifier
+                </a>
+                <form action="{{route('domaines.destroy',$domaine->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
+                  {{csrf_field()}}
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="btn btn-danger">Supprimer</button>
+
+              </form>
+              </td>
+
+              
+
+
+            </tr>
+            <?php
+            $increment0 +=1; 
+            ?>
+            
+        @empty
+           <p>Pas de région</p>
+            
+        @endforelse
+       
+      </tbody>
+    </table>
+    <!--/.tableau-->
+
+  </div>
+  <div class="card-footer">
+
+  </div>
+</div>
+<!--/.Row les domaines-->
+
 <!--Row OPH-->
 <div class="row">
   <div class="col-sm-12">
@@ -196,29 +275,7 @@ $increment2 = 1;
               
             </div>
           </div>
-          <div class="btn-group">
-            <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-              <i class="fas fa-exclamation-circle"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" role="menu">
-              <div class="card bg-primary">
-                <div class="card-header">
-                  <h3 class="card-title">
-                    Information sur les OPH
-                  </h3>
-
-                </div>
-                <div class="card-body">
-                  <p>
-                    Les organisations de personnes handicapées sont mises sur pied pour promouvoir les droits des personnes handicapées par la participation à part entière, l'égalisation des chances, et le développement.
-                  </p>
-                  
-
-
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
       <!-- /.card-header -->
@@ -239,10 +296,8 @@ $increment2 = 1;
                       <i class="fas fa-globe fa-7x"></i>
                      </div>
                      <div class="col-sm-12 col-md-8">
-                       <h3>OPH</h3>
-                       <p>
-                         0
-                       </p>
+                       <h3>{{ $ophs->count() }}</h3>
+                      
                      </div>
                    </div>
                   </div>
@@ -634,7 +689,7 @@ $increment2 = 1;
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Libellé du handicap</th>
+          <th scope="col">Libellé de la langue</th>
           <th scope="col">description</th>
           <th scope="col">Action</th>
         </tr>

@@ -20,6 +20,15 @@
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="nav-link" data-widget="pushmenu" href="#">
+          <i class="fa fa-bars"></i>
+        </a>
+
+      </li>
+
+    </ul>
     <!-- Left navbar links --
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -47,6 +56,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      
       <!-- Messages Dropdown Menu --
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">

@@ -10,10 +10,29 @@
 
 @section('content')
  <div class="row no-gutters">
-        <div class="col-sm-12 col-md-4 bg-gradient-primary">
-            <h3>
-                Nombre de domaines: {{$nbrItems}}
-            </h3>
+        <div class="col-sm-12 col-md-4">
+            <div class="card card-primary text-center">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Nombre de domaines 
+                    </h3>
+
+
+                </div>
+                <div class="card-body ">
+
+                    <h3>
+                        {{$nbrItems}}
+                    </h3>
+
+                </div>
+                <div class="card-footer">
+                    <a href="{{route('domaines.create')}}" class="btn btn-info" title="Ajouter un domaine"><i class="fas fa-plus"></i> En créer</a>
+
+                </div>
+
+            </div>
+           
 
 
         </div>
@@ -23,7 +42,7 @@
             <p >
                 Les indicateurs définis par domaine permettent un suivi de la convention pour la promotion des personnes handicapées
             </p>
-            <a href="{{route('domaines.create')}}" class="btn btn-info" title="Ajouter un domaine"><i class="fas fa-plus"></i> En créer</a>
+            
 
 
         </div>
@@ -57,15 +76,40 @@
 
     <div class="card">
         <div class="card-header">
-            <h4 class="">
+            <h4 class="card-title">
                 {{$item->libelle}}
             </h4>
 
         </div>
         <div class="card-body" >
             <div class="row ">
-                <div class="col-sm-4 bg-success">
-                    {{$item->indicateurs()->count()}}
+                <div class="col-sm-4 ">
+                    
+
+                    <div class="card bg-primary text-center">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Nombre d'indicateurs de ce domaine 
+                            </h3>
+        
+        
+                        </div>
+                        <div class="card-body ">
+        
+                            <h3>
+                                {{$item->indicateurs()->count()}}
+                            </h3>
+        
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{route('indicateurs.index',['domaine'=>$item->libelle])}}" class="btn btn-info" title="Afficher les indicateurs de ce domaine"> Aller aux indicateurs</a>
+        
+                        </div>
+        
+                    </div>
+
+
+
                  </div>
                 <div class="col-sm-8">
                     <h5 class="card-title">{{$item->description?$item->description:"Pas de description"}}</h5>

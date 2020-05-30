@@ -4,7 +4,7 @@
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
-    <li class="breadcrumb-item"><a href="{{route('cheflieus.index')}}">Liste chef-lieux</a></li>
+    <li class="breadcrumb-item"><a href="{{route('cheflieus.index')}}">Liste chefs-lieux</a></li>
     <li class="breadcrumb-item active">Détails province</li>
 
 @endsection
@@ -12,7 +12,7 @@
 @section('content')
 <div class="card">
         <div class="card-header">
-            <h4 class="">
+            <h4 class="card-title">
                 {{$cheflieu->libelle}}
                           </h4>
 

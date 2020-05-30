@@ -56,7 +56,7 @@ Le nombre de peuples et d’ethnies au Burkina révèle le nombre de langues ou 
 
     <div class="card">
         <div class="card-header">
-            <h4 class="">
+            <h4 class="card-title">
                 {{$item->libelle}}
             </h4>
 

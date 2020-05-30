@@ -119,18 +119,19 @@ class OphController extends Controller
         { 
 
             $lastinsertedResp = DB::table('responsables')->latest()->first();
-            $lastinsertedRespId = $lastinsertedResp->id;
+            $lastinsertedRespId = (int)filter_var($lastinsertedResp->id,FILTER_SANITIZE_NUMBER_INT);
+            
 
             $date = \Carbon\Carbon::createFromDate($request->dateCreation)
             ->format('Y-m-d H:i:s');
+            
 
             $oph = new Oph([
             'nomOph'=>$valid['nomOph'],
             'sigle'=>$valid['sigle'],
             'telephoneOph'=>$valid['telephoneOph'],
-            'missionObjectif'=>$valid['telephoneOph'],
+            'missionObjectif'=>$valid['missionObjectif'],
             'dateCreation'=>$date,
-            'type_handicap_id'=>$valid['type_handicap_id'],
             'activite'=>$valid['activite'],
             'beneficiaire'=>$valid['beneficiaire'],
             'accessibilite'=>$valid['accessibilite'],
@@ -151,13 +152,16 @@ class OphController extends Controller
             'numbRecipisse'=>$valid['numbRecipisse'],
             'statut'=>$valid['statut'],
             'type'=>$valid['type']]);
-
+            
             
 
             $oph->save();
-            dd();
+            
+            
+
             $oph->langues()->attach($valid['langue_id']);
-            $oph->domaines()->attach($valid['domaine']);
+            
+            $oph->domaines()->attach($valid['domaine_id']);
             $oph->type_handicaps()->attach($valid['type_handicap_id']);
             return redirect()->route('ophs.index')->with('success','OPH ajoutée avec succès');
 
@@ -208,7 +212,7 @@ class OphController extends Controller
      */
     public function show(Oph $oph)
     {
-        //
+         return view('handi-admin.adminoph.show', compact('oph'));
     }
 
     /**

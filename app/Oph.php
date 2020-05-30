@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Oph extends Model
 {
-    protected $fillable = ['nom','prenom','sexe','phone','profession',
+    protected $fillable =
+     ['nom','prenom','sexe','phone','profession',
 'nomOph',
 'sigle',
 'missionObjectif',
@@ -16,6 +17,7 @@ class Oph extends Model
 'dateCreation',
 'activite',
 'beneficiaire',
+'accessibilite',
 'sourceFinancement',
 'partenaire',
 'nbrAdherantHomme',
@@ -27,6 +29,7 @@ class Oph extends Model
 'structure',
 'langue_id',
 'region_id',
+'responsable_id',
 'province_id',
 'commune_id',
 'zoneInt',
@@ -58,7 +61,7 @@ class Oph extends Model
     }
     public function langues()
     {
-        return $this->belongsToMany('App\Lanque')->withTimestamps();
+        return $this->belongsToMany('App\Langue')->withTimestamps();
     }
     public function type_handicaps()
     {

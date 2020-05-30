@@ -4,7 +4,7 @@
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
-    <li class="breadcrumb-item"><a href="admin/domaines">Liste des domaines</a></li>
+    <li class="breadcrumb-item"><a href="{{route('domaines.index')}}">Liste des domaines</a></li>
     <li class="breadcrumb-item active">Liste des domaines-ajout</li>
 
 @endsection
