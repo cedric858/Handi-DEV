@@ -100,7 +100,7 @@ $increment = 1;
             {{ $type_handicap->libelle }}, &nbsp;
 
             @empty
-            <p>Pas de handicap</p>
+            <p class="badge badge-danger">Pas de handicap</p>
             @endforelse
           </td>
             

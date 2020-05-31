@@ -210,7 +210,7 @@ $increment2 = 1;
                   {{$domaine->description}}
                       
                   @else
-                  <p>Pas de description</p>
+                  <p class="badge badge-danger">Pas de description</p>
                       
                   @endif
                   
@@ -239,7 +239,7 @@ $increment2 = 1;
             ?>
             
         @empty
-           <p>Pas de région</p>
+           <p class="badge badge-danger">Pas de région</p>
             
         @endforelse
        
@@ -518,7 +518,7 @@ $increment2 = 1;
                     @forelse($provinces as $province)
                     {{ $province->libelle }} <br>
                     @empty
-                    <p>Pas de provinces</p>
+                    <p class="badge badge-danger">Pas de provinces</p>
                     @endforelse
                   </td>
                 <td>
@@ -531,18 +531,18 @@ $increment2 = 1;
                     {{ $commune->libelle }} --> {{ $commune->province->libelle }} 
                     <br>
                     @empty
-                    <p>Pas de communes</p>
+                    <p class="badge badge-danger">Pas de communes</p>
                     @endforelse
   
                     
   
                   @empty
-                  <p>Pas de province</p>
+                  <p class="badge badge-danger">Pas de province</p>
                   @endforelse
                 </td>
                   @else
                   <td>
-                    <p>Pas de chef-lieu, province, commune pour cette région</p>
+                    <p class="badge badge-danger">Pas de chef-lieu, province, commune pour cette région</p>
                     
                   </td>
                   
@@ -560,7 +560,7 @@ $increment2 = 1;
             ?>
             
         @empty
-           <p>Pas de région</p>
+           <p class="badge badge-danger">Pas de région</p>
             
         @endforelse
        
@@ -654,7 +654,7 @@ $increment2 = 1;
             ?>
             
         @empty
-           <p>Pas de région</p>
+           <p class="badge badge-danger">Pas de région</p>
             
         @endforelse
        
@@ -724,7 +724,7 @@ $increment2 = 1;
                   {{$langue->description}}
                       
                   @else
-                  <p>Pas de description</p>
+                  <p class="badge badge-danger">Pas de description</p>
                       
                   @endif
                   
@@ -753,7 +753,7 @@ $increment2 = 1;
             ?>
             
         @empty
-           <p>Pas de région</p>
+           <p class="badge badge-danger">Pas de région</p>
             
         @endforelse
        

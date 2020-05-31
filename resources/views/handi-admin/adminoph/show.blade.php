@@ -15,7 +15,8 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"> <i class="fas fa-"></i> Les détails</h5>
+                    <h3 class="card-title"> <i class="fas fa-"></i> Les détails <a href="{{route('ophs.edit',$oph->id)}}" class="btn btn-warning">Modifier</a></h3>
+                
 
                 </div>
                 <div class="card-body">
@@ -95,7 +96,7 @@
                                             {{ $type_handicap->libelle }}, &nbsp;
                                 
                                             @empty
-                                            <p>Pas de handicap</p>
+                                            <p class="badge badge-danger">Pas de handicap</p>
                                             @endforelse
 
                                         </textarea>
@@ -106,8 +107,7 @@
                                        <!--/.Type de handicap-->
                                        <!--Date de création-->
                                        <?php
-                                       $date = \Carbon\Carbon::createFromDate($oph->dateCreation)
-            ->format('d-m-Y')
+                                       $date = \Carbon\Carbon::createFromDate($oph->dateCreation) ->format('d-m-Y')
                                        ?>
                                        <div class="form-group">
                                           <label for="dateCreation">Date de création : </label>
@@ -121,7 +121,7 @@
                                        <textarea disabled name="domaine_id" id="domaine_id" cols="30" rows="10">@forelse($oph->domaines as $domaine)
                                         {{ $domaine->libelle }}, &nbsp;
                                          @empty
-                                        <p>Pas de domaine</p>
+                                        <p class="badge badge-danger">Pas de domaine</p>
                                         @endforelse</textarea>
                                        
                               
@@ -291,7 +291,7 @@
     {{ $langue->libelle }}, &nbsp;
 
     @empty
-    <p>Pas de langues</p>
+    <p class="badge badge-danger">Pas de langues</p>
     @endforelse
   </div>
 
@@ -492,6 +492,9 @@
                     
                         
 
+                </div>
+                <div class="card-footer">
+                    <a href="{{route('ophs.edit',$oph->id)}}" class="btn btn-warning">Modifier</a>
                 </div>
             </div>
 

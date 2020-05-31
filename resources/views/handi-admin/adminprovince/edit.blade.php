@@ -50,7 +50,7 @@
                                         ?> >{{$cheflieu->libelle}}</option>
                                         
                                     @empty
-                                        <p>Pas de chef-lieu</p>
+                                        <p class="badge badge-danger">Pas de chef-lieu</p>
                                         
                                     @endforelse 
                                 </select>

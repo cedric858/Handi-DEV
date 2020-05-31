@@ -223,7 +223,14 @@ class OphController extends Controller
      */
     public function edit(Oph $oph)
     {
-        //
+        $item = Oph::findOrFail($oph)->first();
+        
+        return view('handi-admin.adminoph.edit',['item'=>$item,'typeHandicaps'=>TypeHandicap::all()->sortBy("libelle")
+        ,'domaines'=>Domaine::all()->sortBy("libelle"),
+        'langues'=>Langue::all()->sortBy("libelle"),
+        'regions'=>Region::all()->sortBy("libelle"),
+        'provinces'=>Province::all()->sortBy("libelle"),
+        'communes'=>Commune::all()->sortBy("libelle")]);
     }
 
     /**

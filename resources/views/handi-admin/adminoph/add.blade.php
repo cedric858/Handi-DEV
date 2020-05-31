@@ -385,7 +385,7 @@
                             <option value="{{$province->id}}">{{$province->libelle}}</option>
                             
                         @empty
-                        <p>Pas de provinces pour le moment</p>
+                        <p class="badge badge-danger">Pas de provinces pour le moment</p>
                             
                         @endforelse 
                       </select>
@@ -411,7 +411,7 @@
                     <option value="{{$commune->id}}">{{$commune->libelle}}</option>
                     
                 @empty
-                    <p>Pas de communes pour le moment</p>
+                    <p class="badge badge-danger">Pas de communes pour le moment</p>
                     
                 @endforelse 
               </select>

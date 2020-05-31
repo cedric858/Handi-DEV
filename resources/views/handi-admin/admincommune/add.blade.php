@@ -30,7 +30,7 @@
                     <option value="{{$province->id}}">{{$province->libelle}}</option>
                     
                 @empty
-                    <p>Pas de province</p>
+                    <p class="badge badge-danger">Pas de province</p>
                     
                 @endforelse 
             </select>
