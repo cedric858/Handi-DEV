@@ -16,9 +16,10 @@ class TypeHandicapController extends Controller
      */
     public function index()
     {
+        $active = 'handicap';
         $items = TypeHandicap::orderBy("libelle")->paginate(config('app.nbr_page'));
         $nbrItems = DB::table('type_handicaps')->count();
-     return view('handi-admin.admintypehandicap.index',compact('items','nbrItems'));    
+     return view('handi-admin.admintypehandicap.index',compact('active','items','nbrItems'));    
       }
 
     /**
@@ -28,7 +29,8 @@ class TypeHandicapController extends Controller
      */
     public function create()
     {
-        return view('handi-admin.admintypehandicap.add');
+        $active = 'handicap';
+        return view('handi-admin.admintypehandicap.add',compact('active'));
     }
 
     /**
@@ -39,9 +41,9 @@ class TypeHandicapController extends Controller
      */
     public function store(TypeHandicapRequest $request)
     {
-        
+        $active = 'handicap';
         TypeHandicap::create($request->validated());
-        return redirect()->route('typehandicaps.index')->with('success','Type de handicap  ajouté avec succès');
+        return redirect()->route('typehandicaps.index',['active'=>$active])->with('success','Type de handicap  ajouté avec succès');
     }
 
     /**
@@ -52,11 +54,12 @@ class TypeHandicapController extends Controller
      */
     public function show(TypeHandicap $typeHandicap)
     {
+        $active = 'handicap';
         
         $item = TypeHandicap::findOrFail($typeHandicap)->first();
         
         
-        return view('handi-admin.admintypehandicap.show',compact('item'));
+        return view('handi-admin.admintypehandicap.show',compact('active','item'));
 
     }
 
@@ -68,9 +71,10 @@ class TypeHandicapController extends Controller
      */
     public function edit(TypeHandicap $typeHandicap)
     {
+        $active = 'handicap';
         $item = TypeHandicap::findOrFail($typeHandicap)->first();
         
-        return view('handi-admin.admintypehandicap.edit',compact('item'));
+        return view('handi-admin.admintypehandicap.edit',compact('active','item'));
     }
 
     /**
@@ -82,6 +86,7 @@ class TypeHandicapController extends Controller
      */
     public function update(Request $request, TypeHandicap $typeHandicap)
     {
+        $active = 'handicap';
         $letype = TypeHandicap::find($typeHandicap)->first();
 
         $letype->libelle = request('libelle');
@@ -89,7 +94,7 @@ class TypeHandicapController extends Controller
         $letype->save();
         
         //$langue->update($request->validated());
-        return redirect()->route('typehandicaps.index')->with('success','Type de handicap modifié avec succès');
+        return redirect()->route('typehandicaps.index',['active'=>$active])->with('success','Type de handicap modifié avec succès');
     }
 
     /**
@@ -103,6 +108,7 @@ class TypeHandicapController extends Controller
         $letype = TypeHandicap::find($typeHandicap)->first();
 
         $letype->delete();
-        return redirect()->route('typehandicaps.index')->with('Success','Type de handicap supprimé avec succès');
+        $active = 'handicap';
+        return redirect()->route('typehandicaps.index',['active'=>$active])->with('Success','Type de handicap supprimé avec succès');
     }
 }

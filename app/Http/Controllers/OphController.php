@@ -26,9 +26,10 @@ class OphController extends Controller
      */
     public function index()
     {
+       $active = "oph";
         $items = Oph::paginate(config('app.nbr_page'));
         $nbrItems = DB::table('ophs')->count();
-     return view('handi-admin.adminoph.index',compact('items','nbrItems'));   
+     return view('handi-admin.adminoph.index',compact('active','items','nbrItems'));   
     }
    
 
@@ -39,12 +40,14 @@ class OphController extends Controller
      */
     public function create()
     {
+        $active = "oph";
         return view('handi-admin.adminoph.add',['typeHandicaps'=>TypeHandicap::all()->sortBy("libelle")
         ,'domaines'=>Domaine::all()->sortBy("libelle"),
         'langues'=>Langue::all()->sortBy("libelle"),
         'regions'=>Region::all()->sortBy("libelle"),
         'provinces'=>Province::all()->sortBy("libelle"),
-        'communes'=>Commune::all()->sortBy("libelle")]);
+        'communes'=>Commune::all()->sortBy("libelle"),
+        'active'=>$active]);
     }
 
     /**
@@ -55,7 +58,7 @@ class OphController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $active = "oph";
         $valid = $request->validate([
             
             'nomOph'=>'required',
@@ -122,7 +125,7 @@ class OphController extends Controller
             $lastinsertedRespId = (int)filter_var($lastinsertedResp->id,FILTER_SANITIZE_NUMBER_INT);
             
 
-            $date = \Carbon\Carbon::createFromDate($request->dateCreation)
+            $date = \Carbon\Carbon::createFromDate($valid['dateCreation'])
             ->format('Y-m-d H:i:s');
             
 
@@ -163,7 +166,7 @@ class OphController extends Controller
             
             $oph->domaines()->attach($valid['domaine_id']);
             $oph->type_handicaps()->attach($valid['type_handicap_id']);
-            return redirect()->route('ophs.index')->with('success','OPH ajoutée avec succès');
+            return redirect()->route('ophs.index',["active"=>$active])->with('success','OPH ajoutée avec succès');
 
 
             // DB::table('users')
@@ -212,7 +215,8 @@ class OphController extends Controller
      */
     public function show(Oph $oph)
     {
-         return view('handi-admin.adminoph.show', compact('oph'));
+        $active = "oph";
+         return view('handi-admin.adminoph.show', compact('active','oph'));
     }
 
     /**
@@ -223,9 +227,10 @@ class OphController extends Controller
      */
     public function edit(Oph $oph)
     {
+        $active = "oph";
         $item = Oph::findOrFail($oph)->first();
         
-        return view('handi-admin.adminoph.edit',['item'=>$item,'typeHandicaps'=>TypeHandicap::all()->sortBy("libelle")
+        return view('handi-admin.adminoph.edit',['active'=>$active,'item'=>$item,'typeHandicaps'=>TypeHandicap::all()->sortBy("libelle")
         ,'domaines'=>Domaine::all()->sortBy("libelle"),
         'langues'=>Langue::all()->sortBy("libelle"),
         'regions'=>Region::all()->sortBy("libelle"),
@@ -240,9 +245,127 @@ class OphController extends Controller
      * @param  \App\Oph  $oph
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Oph $oph)
+    public function update(OphRequest $request, Oph $oph)
     {
-        //
+        $active = "oph";
+        $valid = $request->validate([
+            
+            'id'=>'required',
+            'nomOph'=>'required',
+            'sigle'=>'required',
+            'missionObjectif'=>'required',
+            'telephoneOph'=>'required',
+            'type_handicap_id'=>'required|exists:type_handicaps,id',
+            'domaine_id'=>'required|exists:domaines,id',
+            'dateCreation'=>'required',
+            'activite'=>'required',
+            'beneficiaire'=>'required',
+            'accessibilite'=>'required',
+            'sourceFinancement'=>'required',
+            'partenaire'=>'required',
+            'nbrAdherantHomme'=>'required|numeric',
+            'nbrAdherantFemme'=>'required|numeric',
+            'nbrMembreHomme'=>'required|numeric',
+            'nbrMembreFemme'=>'required|numeric',
+            'nbrMembreAlphabetise'=>'required',
+            'nbrMembreScolarise'=>'required',
+            'structure'=>'required',
+            
+            'langue_id'=>'required|exists:langues,id',
+            'region_id'=>'required',
+            'province_id'=>'required',
+            'commune_id'=>'required',
+            'zoneInt'=>'required',
+            'responsable_id'=>'required',
+            'nom'=>'required',
+            'prenom'=>'required|max:255',
+            'phone'=>'required|max:255',
+            'sexe'=>'required|max:255',
+            'profession'=>'required|max:255',
+            'numbRecipisse'=>'required|max:255',
+            'statut'=>'required|max:255',
+            'type'=>'required|max:255',
+        ]);
+        
+       
+
+        DB::beginTransaction();
+        try{
+            //Enregistrement des informations du responsable
+            
+            $responsable = Responsable::find($valid['responsable_id']);
+            $responsable->nom = $valid['nom'];
+            $responsable->nom = $valid['prenom'];
+            $responsable->nom = $valid['phone'];
+            $responsable->nom = $valid['sexe'];
+            $responsable->nom = $valid['profession'];
+            $responsable->save();
+            
+        //    Responsable::find(['nom'=>$valid['nom'],
+        //     'prenom'=>$valid['prenom'],
+        //     'phone'=>$valid['phone'],
+        //     'profession'=>$valid['profession'],
+        //     'sexe'=>$valid['sexe']]);
+   
+          
+   
+
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            throw $e;
+        }
+        try
+        { 
+
+            $lastinsertedResp = DB::table('responsables')->latest()->first();
+            $lastinsertedRespId = (int)filter_var($lastinsertedResp->id,FILTER_SANITIZE_NUMBER_INT);
+
+
+            $date = \Carbon\Carbon::createFromDate($valid['dateCreation'])
+            ->format('Y-m-d H:i:s');
+
+            $oph = Oph::find($valid['id']);
+            $oph->nomOph = $valid['nomOph'];
+            $oph->sigle = $valid['sigle'];
+            $oph->telephoneOph = $valid['telephoneOph'];
+            $oph->missionObjectif = $valid['missionObjectif'];
+            $oph->dateCreation = $date;
+            $oph->activite = $valid['activite'];
+            $oph->beneficiaire = $valid['beneficiaire'];
+            $oph->accessibilite = $valid['accessibilite'];
+            $oph->sourceFinancement = $valid['sourceFinancement'];
+            $oph->partenaire = $valid['partenaire'];
+            $oph->nbrAdherantHomme = $valid['nbrAdherantHomme'];
+            $oph->nbrAdherantFemme = $valid['nbrAdherantFemme'];
+            $oph->nbrMembreHomme = $valid['nbrMembreHomme'];
+            $oph->nbrMembreFemme = $valid['nbrMembreFemme'];
+            $oph->nbrMembreAlphabetise = $valid['nbrMembreAlphabetise'];
+            $oph->nbrMembreScolarise = $valid['nbrMembreScolarise'];
+            $oph->structure = $valid['structure'];
+            $oph->region_id = $valid['region_id'];
+            $oph->province_id = $valid['province_id'];
+            $oph->commune_id = $valid['commune_id'];
+            $oph->zoneInt = $valid['zoneInt'];
+            $oph->responsable_id = $lastinsertedRespId;
+            $oph->numbRecipisse = $valid['numbRecipisse'];
+            $oph->statut = $valid['statut'];
+            $oph->type = $valid['type'];
+            
+            $oph->save();
+            $oph->langues()->sync($valid['langue_id']);
+            $oph->domaines()->sync($valid['domaine_id']);
+            $oph->type_handicaps()->sync($valid['type_handicap_id']);
+            
+            return redirect()->route('ophs.index',['active'=>$active])->with('success','OPH mis à jour avec succès');
+        }
+        catch(Exception $e)
+        {
+            DB::rollBack();
+            throw $e;
+        }
+        DB::commit();
     }
 
     /**
@@ -253,6 +376,9 @@ class OphController extends Controller
      */
     public function destroy(Oph $oph)
     {
-        //
+        $active = "oph";
+
+        $oph->delete();
+        return redirect()->route('ophh.index',['active'=>$active])->with('Success','OPH supprimée avec succès');
     }
 }

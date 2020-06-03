@@ -26,6 +26,7 @@ class OphRequest extends FormRequest
         
         return [
             
+            'id'=>'required',
             'nomOph'=>'required',
             'sigle'=>'required',
             'missionObjectif'=>'required',
@@ -49,6 +50,7 @@ class OphRequest extends FormRequest
             'province_id'=>'required',
             'commune_id'=>'required',
             'zoneInt'=>'required',
+            'responsable_id'=>'required',
             'nom'=>'required',
             'prenom'=>'required',
             'prenom'=>'required|max:255',

@@ -17,11 +17,12 @@ class DomaineController extends Controller
     public function index()
     {
         //1 Nombre d'indicateur 
+        $active = "domaine";
         
 
         $items = Domaine::orderBy("libelle")->paginate(config('app.nbr_page'));
         $nbrItems = DB::table('domaines')->count();
-     return view('handi-admin.admindomaine.index',compact('items','nbrItems'));
+     return view('handi-admin.admindomaine.index',compact('active','items','nbrItems'));
     }
 
     /**
@@ -31,7 +32,8 @@ class DomaineController extends Controller
      */
     public function create()
     {
-        return view('handi-admin.admindomaine.add');
+        $active = "domaine";
+        return view('handi-admin.admindomaine.add',compact('active'));
     }
 
     /**
@@ -43,7 +45,8 @@ class DomaineController extends Controller
     public function store(DomaineRequest $request)
     {
         Domaine::create($request->validated());
-        return redirect()->route('domaines.index')->with('success','Domaine ajouté avec succès');
+        $active = "domaine";
+        return redirect()->route('domaines.index',['active'=>$active])->with('success','Domaine ajouté avec succès');
 
     }
 
@@ -55,9 +58,10 @@ class DomaineController extends Controller
      */
     public function show(Domaine $domaine)
     {
+        $active = "domaine";
         $item = Domaine::findOrFail($domaine)->first();
         
-        return view('handi-admin.admindomaine.show',compact('item'));
+        return view('handi-admin.admindomaine.show',compact('active','item'));
     }
 
     /**
@@ -69,8 +73,8 @@ class DomaineController extends Controller
     public function edit(Domaine $domaine)
     {
         $item = Domaine::findOrFail($domaine)->first();
-        
-        return view('handi-admin.admindomaine.edit',compact('item'));
+        $active = "domaine";
+        return view('handi-admin.admindomaine.edit',compact('active','item'));
     }
 
     /**
@@ -82,7 +86,7 @@ class DomaineController extends Controller
      */
     public function update(DomaineRequest $request, Domaine $domaine)
     {
-        
+        $active = "domaine";
         
         $ledomaine = Domaine::find($domaine)->first();
        $validatedDomaines = $request->validated();
@@ -92,7 +96,7 @@ class DomaineController extends Controller
         $ledomaine->save();
         
         //$domaine->update($request->validated());
-        return redirect()->route('domaines.index')->with('success','Domaine modifié avec succès');
+        return redirect()->route('domaines.index',['active'=>$active])->with('success','Domaine modifié avec succès');
     }
 
     /**
@@ -104,15 +108,16 @@ class DomaineController extends Controller
     public function destroy(Domaine $domaine)
     {
         $ledomaine = Domaine::find($domaine)->first();
+        $active = "domaine";
         if( $ledomaine->indicateurs()->count() > 0)
         {
-            return redirect()->route('domaines.index')
+            return redirect()->route('domaines.index',['active',$active])
             ->with('error','Veuillez supprimer d"abord les indicateurs de ce domaine');
 
         }
 
         $ledomaine->delete();
-        return redirect()->route('domaines.index')->with('success','Domaine supprimé avec succès');
+        return redirect()->route('domaines.index',['active',$active])->with('success','Domaine supprimé avec succès');
 
 
     }

@@ -14,9 +14,10 @@ class IndicateurController extends Controller
      */
     public function index()
     {
+        $active = 'indicateur';
         $items = Indicateur::all();
         
-        return view('handi-admin.adminindicateur.index',compact('items'));
+        return view('handi-admin.adminindicateur.index',compact('active','items'));
     }
 
     /**
@@ -26,7 +27,8 @@ class IndicateurController extends Controller
      */
     public function create()
     {
-        return view('handi-admin.adminindicateur.add');
+        $active = 'indicateur';
+        return view('handi-admin.adminindicateur.add',compact('active'));
     }
 
     /**
@@ -37,6 +39,7 @@ class IndicateurController extends Controller
      */
     public function store(Request $request)
     {
+        
         //
     }
 

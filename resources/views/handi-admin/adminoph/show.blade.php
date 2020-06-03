@@ -53,7 +53,7 @@
                                         <!--Téléphone OPH-->
                                         <div class="form-group">
                                           <label for="telephoneOph">Téléphone de la structure: </label>
-                                          <input  disabled aria-describedby="errorTelephoneOph" type="text" class="form-control @error('telephoneOph') is-invalid @enderror " name="telephoneOph" value="{{old('telephoneOph',$oph->phone)}}" placeholder="Téléphone  responsable">
+                                          <input  disabled aria-describedby="errorTelephoneOph" type="text" class="form-control @error('telephoneOph') is-invalid @enderror " name="telephoneOph" value="{{old('telephoneOph',$oph->telephoneOph)}}" placeholder="Numéros de Téléphone de l'OPH ">
                                           @error('telephoneOph')
                                           <small class="form-text text-danger" id='telephoneOph'>
                                               {{$errors->first('telephoneOph')}}
@@ -68,21 +68,26 @@
                                         <!--/.Téléphone OPH-->
                               
                                         <!--Mission et objectifs-->
+                                        <?php
+                                            $missionsArray = explode( "." ,$oph->missionObjectif);
+                                            
+                                            
+                                          ?>
                                         <div class="form-group">
                                           <label for="missionObjectif">Mission et Objectif:</label>
-                                  
-                                          <textarea disabled aria-describedby="errorMissionObjectif" name="missionObjectif" class="form-control @error('missionObjectif') is-invalid @enderror " id="missionObjectif" cols="30" rows="10">{{old('missionObjectif',$oph->missionObjectif)}}</textarea>
-                                          @error('missionObjectif')
-                                              <small class="form-text text-danger" id='errorMissionObjectif'>
-                                                  {{$errors->first('missionObjectif')}}
-                              
-                                              </small>
-                                          @enderror
-                              
-                              
-                              
-                              
-                                      </div>
+                                          <ul>
+                                            @forelse($missionsArray as $missionArray)
+                                            <li>
+                                              {{ $missionArray }}
+                                                
+                                            </li>
+                                            
+                                             @empty
+                                            <p class="badge badge-danger">Pas de mission ou objectif</p>
+                                            @endforelse
+    
+                                           </ul>
+                                        </div>
                               
                                         
                                         <!--/.Mission et objectifs-->
@@ -91,17 +96,19 @@
 
                                       <div class="form-group">
                                         <label for="type_handicap_id">Type de handicap : </label>
-                                        <textarea disabled name="type_handicap_id" id="type_handicap_id" cols="10" rows="10">
+                                        <ul>
                                             @forelse($oph->type_handicaps as $type_handicap)
-                                            {{ $type_handicap->libelle }}, &nbsp;
+                                            <li>
+                                                {{ $type_handicap->libelle }}
+                                            </li>
+                                            
                                 
                                             @empty
                                             <p class="badge badge-danger">Pas de handicap</p>
                                             @endforelse
 
-                                        </textarea>
-                                       
-                                      </div>
+                                        </ul>
+                                    </div>
                               
                               
                                        <!--/.Type de handicap-->
@@ -118,62 +125,111 @@
                                        <!--/.Date de création-->
                                        <!--domaine-->
                                        <label for="domaine_id">Domaines : </label>
-                                       <textarea disabled name="domaine_id" id="domaine_id" cols="30" rows="10">@forelse($oph->domaines as $domaine)
-                                        {{ $domaine->libelle }}, &nbsp;
+                                       <ul>
+                                        @forelse($oph->domaines as $domaine)
+                                        <li>
+                                            {{ $domaine->libelle }}
+                                        </li>
+                                        
                                          @empty
                                         <p class="badge badge-danger">Pas de domaine</p>
-                                        @endforelse</textarea>
+                                        @endforelse
+
+                                       </ul>
+                                       
                                        
                               
                                        <!--/.domaine-->
                                        <!--Activité Menée-->
                                        <div class="form-group">
                                           <label for="activite">Activités menées : </label>
-                                          <textarea  disabled aria-describedby="errorActivite" type="text" class="form-control @error('activite') is-invalid @enderror " placeholder="Listez les activités séparées par des virguless">
-                                            {{old('activite',$oph->activite)}}
-                                          </textarea>
-                                          @error('activite')
-                                          <small class="form-text text-danger" id='errorActivite'>
-                                              {{$errors->first('activite')}}
-                                
-                                          </small>
-                                      @enderror
+                                          <?php
+                                            $activitesArray = explode(".",$oph->activite);
+                                            
+                                          ?>
+                                          <ul>
+                                            @forelse($activitesArray as  $activiteArray)
+                                            <li>
+                                            
+                                                {{ $activiteArray }}
+                                            </li>
+
+                                            @empty
+                                             <p class="badge badge-danger">Pas d'activité</p>
+                                             @endforelse
+
+                                          </ul>
+                                          
+                                    
                                 
                                         </div>
                               
                                        <!--/.Activité Menée-->
                                        <!--Bénéficiaires-->
+                                       <?php
+                                            $beneficiairesArray = explode(".",$oph->beneficiaire);
+                                            
+                                          ?>
                                        <div class="form-group">
                                           <label for="beneficiaire">Bénéficiaires : </label>
-                                          <textarea name="" id="" cols="30" rows="10" disabled>{{ $oph->beneficiaire }}</textarea>
+                                          <ul>
+                                            @forelse($beneficiairesArray as  $beneficiaireArray)
+                                            <li>
+                                                {{ $beneficiaireArray }}
+                                            </li>
+
+                                            @empty
+                                             <p class="badge badge-danger">Pas d'activité</p>
+                                             @endforelse
+
+                                          </ul>
                                           
                                 
                                         </div>
                               
                                        <!--/.Bénéficiaires-->
                                        <!--Accessibilité-->
+                                       <?php
+                                       $accessibilitesArray = explode(".",$oph->accessibilite);
+                                       
+                                     ?>
                                        <div class="form-group">
                                           <label for="accessibilite">Accéssibilité : </label>
-                                          <input  disabled aria-describedby="errorAccessibilite" type="text" class="form-control @error('accessibilite') is-invalid @enderror " name="accessibilite" value="{{old('accessibilite',$oph->accessibilite)}}" placeholder="Séparez les différentes options par des virguless">
-                                          @error('accessibilite')
-                                          <small class="form-text text-danger" id='errorAccessibilite'>
-                                              {{$errors->first('errorAccessibilite')}}
-                                
-                                          </small>
-                                      @enderror
+                                          <ul>
+                                            @forelse($accessibilitesArray as  $accessibiliteArray)
+                                            <li>
+                                                {{ $accessibiliteArray }}
+                                            </li>
+
+                                            @empty
+                                             <p class="badge badge-danger">Pas d'accessibilité</p>
+                                             @endforelse
+
+                                          </ul>
+                                          
                                 
                                         </div>
                                        <!--/.Accessibilité-->
                                        <!--Source de financement-->
+                                       <?php
+                                       $sourcesArray = explode(".",$oph->sourceFinancement);
+                                       
+                                     ?>
                                        <div class="form-group">
                                           <label for="sourceFinancement">Source de Financement : </label>
-                                          <input  disabled aria-describedby="errorSourceFinancement" type="text" class="form-control @error('sourceFinancement') is-invalid @enderror " name="sourceFinancement" value="{{old('sourceFinancement',$oph->sourceFinancement)}}" placeholder="Renseignez les sources de financement séparées par des virgules">
-                                          @error('sourceFinancement')
-                                          <small class="form-text text-danger" id='errorSourceFinancement'>
-                                              {{$errors->first('sourceFinancement')}}
-                                
-                                          </small>
-                                      @enderror
+                                          <ul>
+                                            @forelse($sourcesArray as  $sourceArray)
+                                            <li>
+                                                
+                                                {{ $sourceArray }}
+                                            </li>
+
+                                            @empty
+                                             <p class="badge badge-danger">Pas de sources de financement</p>
+                                             @endforelse
+
+                                          </ul>
+                                          
                                 
                                         </div>
                               
@@ -181,7 +237,7 @@
                                        <!--Partenaires-->
                                        <div class="form-group">
                                           <label for="partenaire">Partenaires : </label>
-                                          <input  disabled aria-describedby="errorPartenaire" type="text" class="form-control @error('partenaire') is-invalid @enderror " name="partenaire" value="{{old('partenaire',$oph->partenaire)}}" placeholder="Renseignez les partenaires séparés par des virgules">
+                                          <input  disabled aria-describedby="errorPartenaire" type="text" class="form-control @error('partenaire') is-invalid @enderror " name="partenaire" value="{{old('partenaire',$oph->partenaire)}}" placeholder="Renseignez les partenaires séparés par des points">
                                           @error('partenaire')
                                           <small class="form-text text-danger" id='partenaire'>
                                               {{$errors->first('partenaire')}}
@@ -356,7 +412,7 @@
 <!--Zone d'intervention-->
 <div class="form-group">
     <label for="zoneInt">Zone d'intervention : </label>
-    <input  disabled aria-describedby="errorZoneInt" type="text" class="form-control @error('zoneInt') is-invalid @enderror " name="zoneInt" value="{{old('zoneInt',$oph->commune->libelle)}}" placeholder="Listez les zones d'intervention séparées par des virguless">
+    <input  disabled aria-describedby="errorZoneInt" type="text" class="form-control @error('zoneInt') is-invalid @enderror " name="zoneInt" value="{{old('zoneInt',$oph->commune->libelle)}}" placeholder="Listez les zones d'intervention séparées par des pointss">
     @error('zoneInt')
     <small class="form-text text-danger" id='errorActivite'>
         {{$errors->first('zoneInt')}}

@@ -96,12 +96,21 @@ $increment = 1;
             <td>{{ $item->nomOph }}</td>
             <td>{{$item->sigle}}</td>
             <td>
-            @forelse($item->type_handicaps as $type_handicap)
-            {{ $type_handicap->libelle }}, &nbsp;
+              <ul>
+                @forelse($item->type_handicaps as $type_handicap)
+                <li>
+                  {{ $type_handicap->libelle }}
 
-            @empty
-            <p class="badge badge-danger">Pas de handicap</p>
-            @endforelse
+                </li>
+                
+
+                
+                
+
+                @empty
+                <p class="badge badge-danger">Pas de handicap</p>
+                @endforelse
+              </ul>
           </td>
             
             <td>{{$item->responsable->prenom}}&nbsp;{{$item->responsable->nom}}</td>
@@ -112,9 +121,15 @@ $increment = 1;
             <a href="{{route('ophs.edit',$item->id)}}" class="btn btn-warning">
                 <i class="fas fa-pencil-alt"></i> Modifier
             </a>
-            <a href="{{route('ophs.destroy',$item->id)}}" class="btn btn-danger">
-                <i class="fa fa-pencil"></i> Supprimer
-            </a>
+           
+              <form action="{{route('ophs.destroy',$item->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
+                {{csrf_field()}}
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="btn btn-danger"><i class="fa fa-pencil"></i>  Supprimer</button>
+
+            </form>
+                
+            
 
             </td>
           </tr>

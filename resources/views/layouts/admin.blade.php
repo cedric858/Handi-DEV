@@ -464,179 +464,76 @@
           </li>
 -->
 <!--Indicateurs-->
-<?php $indicateurs = App\Indicateur::all() ?>
 
-          <li class="nav-header">
-              LES INDICATEURS
-              <span class="badge badge-info right">{{DB::table('indicateurs')->count()}}</span>
-
-          </li>
-          <li class="nav-item">
-              <a href="{{route('indicateurs.index')}}" class="nav-link">
-                  <i class="nav-icon fas fa-eye"></i>
-                  <p>
-                    Voir
-                  </p>
-                </a>
-             </li>
-             <li class="nav-item">
-                    <a href="{{route('indicateurs.create')}}" class="nav-link" title="Ajouter indicateur">
-                        <i class="fas fa-plus"></i>
-                        <p >
-                            Ajouter indicateur
-                        </p>
-
-                    </a>
-             </li>
 
           
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Liste des indicateurs
-                <i class="fas fa-angle-left right"></i>
-              </p>
+          <li class="nav-item">
+            <a href="{{route('indicateurs.index')}}" class="nav-link @if(isset($active) && $active == "indicateur") active  @endif ">
+              
+              <i class="fas fa-tachometer-alt"></i> Gérer les indicateurs 
             </a>
-            <ul class="nav nav-treeview">
-                @forelse($indicateurs as $indicateur)
-                <li class="nav-item">
-                    <a href="{{route('indicateurs.show',$indicateur->id)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>{{$indicateur->libelle}}</p>
-
-
-                    </a>
-                </li>
-
-                @empty
-                <li class="nav-item">
-                    <a href="{{route('indicateurs.create')}}" class="nav-link" title="Ajouter indicateur">
-                        
-                        <span class="badge badge-danger">
-                            Pas d'indicateurs
-                       </span>
-
-                    </a>
-
-
-
-                </li>
-                @endforelse
-            </ul>
           </li>
+          
 <!---Indicateurs/-->
 <!--OPH-->
-{{$ophs = DB::table('ophs')->orderBy('sigle','asc')->get()}}    
-<li class="nav-header">
-
-              LES OPH
-              <span class="badge badge-info right">{{DB::table('ophs')->count()}}</span>
-
-          </li>
-          <li class="nav-item">
-              <a href="{{route('ophs.index')}}" title="Afficher tous les OPH" class="nav-link">
-                  <i class="nav-icon fas fa-eye"></i>
-                  <p>
-                    Voir
-                  </p>
-                </a>
-             </li>
-             <li class="nav-item">
-                    <a href="{{route('ophs.create')}}" class="nav-link" title="Ajouter OPH">
-                        <i class="fas fa-plus"></i>
-                        <p >
-                            Ajouter OPH
-                        </p>
-
-                    </a>
-             </li>
-
-          
-          <li class="nav-item has-treeview">
-      
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Liste des OPHs
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-                @forelse($ophs as $oph)
-                <li class="nav-item">
-                    <a href="{{route('ophs.show',$oph->id)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>{{$oph->sigle}}</p>
-
-
-                    </a>
-                </li>
-
-                @empty
-                <li class="nav-item">
-                <a href="{{route('ophs.create')}}" class="nav-link" title="Ajouter OPH">
-                        
-                        <span class="badge badge-danger">
-                            Pas d'OPHs
-                       </span>
-
-                    </a>
-                 </li>
-                @endforelse
-            </ul>
-          </li>
+<li class="nav-item">
+  <a href="{{route('ophs.index')}}" class="nav-link @if(isset($active) && $active == "oph") active  @endif   ">
+    <i class="fas fa-globe"></i>
+    <p> Gérer les OPHs</p>
+  </a>
+</li>
 <!---OPH/-->
-          <li class="nav-header">PARAMETRE</li>
+          
+          
           <li class="nav-item">
-            <a href="route('users.index')" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Gérer mon compte</p>
+            <a href="{{route('domaines.index')}}" class="nav-link @if(isset($active) && $active == "domaine") active  @endif">
+              <i class="fas fa-briefcase"></i>
+              <p> Gérer les domaines</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('domaines.index')}}" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Gérer les domaines</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('typehandicaps.index')}}" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
+            <a href="{{route('typehandicaps.index')}}" class="nav-link @if(isset($active) && $active == "handicap") active  @endif ">
+              <i class="fas fa-wheelchair"></i>
               <p>Gérer les types de handicap</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('regions.index')}}" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
+            <a href="{{route('regions.index')}}" class="nav-link @if(isset($active) && $active == "region") active  @endif ">
+              <i class="fas fa-landmark"></i>
               <p>Gérer les régions</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('cheflieus.index')}}" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
+            <a href="{{route('cheflieus.index')}}" class="nav-link @if(isset($active) && $active == "cheflie") active  @endif ">
+              <i class="far fa-building"></i>
               <p>Gérer les chef-lieux</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{route('provinces.index')}}" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
+            <a href="{{route('provinces.index')}}" class="nav-link @if(isset($active) && $active == "province") active  @endif ">
+              <i class="fas fa-hotel"></i>
               <p>Gérer les provinces</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('communes.index')}}" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
+            <a href="{{route('communes.index')}}" class="nav-link @if(isset($active) && $active == "commune") active  @endif ">
+              <i class="fas fa-circle"></i>
               <p>Gérer les Communes</p>
             </a>
           </li>
 
 
           <li class="nav-item">
-            <a href="{{route('langues.index')}}" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
+            <a href="{{route('langues.index')}}" class="nav-link @if(isset($active) && $active == "langue") active  @endif ">
+              <i class="fas fa-language"></i>
               <p>Gérer les langues</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="route('users.index')" class="nav-link @if(isset($active) && $active == "compte") active  @endif ">
+              <i class="fas fa-user"></i>
+              <p>Gérer mon compte</p>
             </a>
           </li>
         </ul>

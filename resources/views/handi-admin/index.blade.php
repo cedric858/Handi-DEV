@@ -12,19 +12,20 @@ $increment = 1;
 $increment0 = 1;
 $increment1 = 1;
 $increment2 = 1;
+$increment3 = 1;
 ?>
 
 <!--Row-->
             <div class="row">
               <div class="col-md-12">
-                <div class="card">
+                <div class="card collapsed-card">
                   <div class="card-header">
-                    <h5 class="card-title">Les indicateurs: <span class="badge badge-info">{{$indicateurs->count()}}</span> </h5>
+                    <h5 class="card-title"><i class="fas fa-tachometer-alt"></i> Les indicateurs: <span class="badge badge-info">{{$indicateurs->count()}}</span> </h5>
                   
     
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
+                        <i class="fas fa-plus"></i>
                       </button>
                       <div class="btn-group">
                         <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -43,8 +44,8 @@ $increment2 = 1;
                     <!--Card pour les indicateurs-->
                     <div class="row" >
                       <!--Card info stat-->
-                      <div class="col-sm-4" >
-                        <div class="card card-outline card-primary">
+                      <div class="col-sm-12 col-md-4 text-center" >
+                        <div class="card  card-primary" >
                             <div class="card-header">
                                  <h3 class="card-title">Nombre total d'indicateurs</h3>
                             </div>
@@ -54,7 +55,7 @@ $increment2 = 1;
                              </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                              <a href="{{route('indicateurs.create')}}" class="btn btn-success">Ajouter un indicateur</a>
+                              
                                <a href="{{route('indicateurs.index')}}" class="btn btn-primary">Voir la liste de tous les indicateurs</a>
                             </div>
                           <!-- /.card-footer -->
@@ -156,14 +157,14 @@ $increment2 = 1;
 <!--/.ROw indicateur-->
 
 <!--Row les domaines-->
-<div class="card">
+<div class="card collapsed-card">
   <div class="card-header">
-    <h3 class="card-title">
+    <h3 class="card-title"> <i class="fas fa-briefcase"></i>
       Les différents domaines: <span class="badge badge-info">{{$domaines->count()}}</span>
     </h3>
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse">
-        <i class="fas fa-minus"></i>
+        <i class="fas fa-plus"></i>
       </button>
       <div class="btn-group">
         <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -257,13 +258,13 @@ $increment2 = 1;
 <!--Row OPH-->
 <div class="row">
   <div class="col-sm-12">
-    <div class="card">
+    <div class="card collapsed-card">
       <div class="card-header">
-        <h5 class="card-title">Les Organisations de Personnes Handicapées(OPH) : <span class="badge badge-info">{{$ophs->count()}}</span> </h5>
+        <h5 class="card-title"> <i class="fas fa-globe"></i> Les Organisations de Personnes Handicapées(OPH) : <span class="badge badge-info">{{$ophs->count()}}</span> </h5>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
+            <i class="fas fa-plus"></i>
           </button>
           <div class="btn-group">
             <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -281,41 +282,88 @@ $increment2 = 1;
       <!-- /.card-header -->
       <!--Card body-->
       <div class="card-body">
+        <div class="row">
+           <!--card nombre OPH--> 
+           <div class="col-sm-12 col-md-4">
+            <div class="card card-primary text-center">
+              <div class="card-header">
+                   <h3 class="card-title">Nombre total d'OPH</h3>
+              </div>
+                <!-- /.card-header -->
+              <div class="card-body">
+                
+                    <h3>{{ $ophs->count() }}</h3>
+                   
+                   
+                  
+               </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+               <a href="{{route('ophs.index')}}" class="btn btn-primary">
+                 Voir les OPHs
+               </a>
+
+              </div>
+           <!-- /.card-footer -->
+            </div>
+
+           </div>
+             
+         <!--/.Card nombre OPH-->
+         <!--card list OPH--> 
+         <div class="col-sm-12 col-md-8">
+           <table>
+             <thead>
+               <tr>
+                 <th>
+                   #
+                 </th>
+                 <th>
+                   Nom de l'OPH
+                 </th>
+                 <th>
+                   Action
+                 </th>
+               </tr>
+               <tbody>
+                 @forelse($ophs as $oph)
+                 <tr>
+                  <th>
+                     {{$increment3}}
+  
+                  </th>
+                  <td>
+                    {{ $oph->nomOph }}
+                  </td>
+                  <td>
+                  <a href="{{route('ophs.show',$oph->id)}}" class="btn btn-info">Voir détails</a>
+                    <a href="{{route('ophs.show',$oph->id)}}" class="btn btn-warning">Modifier</a>
+                    <form action="{{route('ophs.destroy',$oph->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
+                      {{csrf_field()}}
+                      <input type="hidden" name="_method" value="DELETE">
+                      <button class="btn btn-danger">Supprimer</button>
+    
+                  </form>
+                  </td>
+
+                 </tr>
+                 @empty
+                 <p class="badge badge-danger">
+                   Pas d'OPH
+                 </p>
+                 @endforelse
+                 
+               </tbody>
+             </thead>
+           </table>
+
+         </div>
+
+        </div>
         
 
-           <!--card association--> 
-             <div class="card card-primary">
-                 <div class="card-header">
-                      <h3 class="card-title">Nombre total d'OPH</h3>
-                 </div>
-                   <!-- /.card-header -->
-                 <div class="card-body">
-                   <div class="row">
-                     <div class="col-sm-12 col-md-4">
-                      
-                      <i class="fas fa-globe fa-7x"></i>
-                     </div>
-                     <div class="col-sm-12 col-md-8">
-                       <h3>{{ $ophs->count() }}</h3>
-                      
-                     </div>
-                   </div>
-                  </div>
-                 <!-- /.card-body -->
-                 <div class="card-footer">
-                  <a href="{{route('ophs.index')}}" class="btn btn-primary">
-                    Voir les OPHs
-                  </a>
-
-                 </div>
-              <!-- /.card-footer -->
-             </div>
-         <!--/.Card Association-->
-         <!--card ONG--> 
-    <!--/.Card ONG-->
-        <!-- /.card -->
-       <!--/card info indicateur nbr handi -->
-      <!--/.row-->
+          
+  
     </div>
       <!-- ./card-body -->
       <div class="card-footer">
@@ -331,9 +379,9 @@ $increment2 = 1;
 </div>
 <!--/.ROW OPH-->
 <!--row les régions-->
-<div class="card">
+<div class="card collapsed-card">
   <div class="card-header">
-    <h3 class="card-title">
+    <h3 class="card-title"> <i class="fas fa-chart-area"></i>
       Les régions, chefs-lieux, provinces, communes
     </h3>
     <div class="card-tools">
@@ -576,9 +624,9 @@ $increment2 = 1;
 
 <!--/.row les régions -->
 <!--row les handicaps-->
-<div class="card">
+<div class="card collapsed-card">
   <div class="card-header">
-    <h3 class="card-title">
+    <h3 class="card-title"><i class="fas fa-wheelchair"></i>
       Les différent types de handicaps: <span class="badge badge-info">{{$handicaps->count()}}</span>
     </h3>
     <div class="card-tools">
@@ -642,7 +690,7 @@ $increment2 = 1;
                   <input type="hidden" name="_method" value="DELETE">
                   <button class="btn btn-danger">Supprimer</button>
 
-              </form>
+                </form>
   
               </td>
               
@@ -670,9 +718,9 @@ $increment2 = 1;
 
 <!--/.row les handicaps-->
 <!--Row les langues-->
-<div class="card">
+<div class="card collapsed-card">
   <div class="card-header">
-    <h3 class="card-title">
+    <h3 class="card-title"><i class="fas fa-language"></i> 
       Les différents langues parlées au burkina faso: <span class="badge badge-info">{{$langues->count()}}</span>
     </h3>
     <div class="card-tools">

@@ -67,7 +67,7 @@
           <!--Téléphone OPH-->
           <div class="form-group">
             <label for="telephoneOph">Téléphone de la structure<span class="text text-danger">*</span> </label>
-            <input  required aria-describedby="errorTelephoneOph" type="text" class="form-control @error('telephoneOph') is-invalid @enderror " name="telephoneOph" value="{{old('telephoneOph',"76 91 32 39")}}" placeholder="Téléphone  responsable">
+            <input  required aria-describedby="errorTelephoneOph" type="text" class="form-control @error('telephoneOph') is-invalid @enderror " name="telephoneOph" value="{{old('telephoneOph',"76 91 32 39")}}" placeholder="Numéros de Téléphone de l'OPH">
             @error('telephoneOph')
             <small class="form-text text-danger" id='telephoneOph'>
                 {{$errors->first('telephoneOph')}}
@@ -150,7 +150,7 @@
          <!--Activité Menée-->
          <div class="form-group">
             <label for="activite">Activités menées <span class="text text-danger">*</span> </label>
-            <input  required aria-describedby="errorActivite" type="text" class="form-control @error('activite') is-invalid @enderror " name="activite" value="{{old('activite',"Santé, Sensibilisation des masses sur les méfaits des MST, Sensibilisation sur les méfaits de l'alcool, du tabac et de la drogue, Couture, Tissage, Artisanat")}}" placeholder="Listez les activités séparées par des virguless">
+            <input  required aria-describedby="errorActivite" type="text" class="form-control @error('activite') is-invalid @enderror " name="activite" value="{{old('activite',"Santé, Sensibilisation des masses sur les méfaits des MST, Sensibilisation sur les méfaits de l'alcool, du tabac et de la drogue, Couture, Tissage, Artisanat")}}" placeholder="Listez les activités séparées par des pointss">
             @error('activite')
             <small class="form-text text-danger" id='errorActivite'>
                 {{$errors->first('activite')}}
@@ -164,7 +164,7 @@
          <!--Bénéficiaires-->
          <div class="form-group">
             <label for="beneficiaire">Bénéficiaires <span class="text text-danger">*</span> </label>
-            <input  required aria-describedby="errorBeneficiare" type="text" class="form-control @error('beneficiaire') is-invalid @enderror " name="beneficiaire" value="{{old('beneficiaire',"Hommes, Femmes, Garçons, Filles")}}" placeholder="Listez les bénéficiaire séparés par des virgules">
+            <input  required aria-describedby="errorBeneficiare" type="text" class="form-control @error('beneficiaire') is-invalid @enderror " name="beneficiaire" value="{{old('beneficiaire',"Hommes, Femmes, Garçons, Filles")}}" placeholder="Listez les bénéficiaire séparés par des points">
             @error('activite')
             <small class="form-text text-danger" id='errorActivite'>
                 {{$errors->first('activite')}}
@@ -178,7 +178,7 @@
          <!--Accessibilité-->
          <div class="form-group">
             <label for="accessibilite">Accéssibilité <span class="text text-danger">*</span> </label>
-            <input  required aria-describedby="errorAccessibilite" type="text" class="form-control @error('accessibilite') is-invalid @enderror " name="accessibilite" value="{{old('accessibilite',"Communication accessible aux personnes déficientes visuelles, Communication accessible aux personnes déficientes auditives")}}" placeholder="Séparez les différentes options par des virguless">
+            <input  required aria-describedby="errorAccessibilite" type="text" class="form-control @error('accessibilite') is-invalid @enderror " name="accessibilite" value="{{old('accessibilite',"Communication accessible aux personnes déficientes visuelles, Communication accessible aux personnes déficientes auditives")}}" placeholder="Séparez les différentes options par des pointss">
             @error('accessibilite')
             <small class="form-text text-danger" id='errorAccessibilite'>
                 {{$errors->first('errorAccessibilite')}}
@@ -191,7 +191,7 @@
          <!--Source de financement-->
          <div class="form-group">
             <label for="sourceFinancement">Source de Financement <span class="text text-danger">*</span> </label>
-            <input  required aria-describedby="errorSourceFinancement" type="text" class="form-control @error('sourceFinancement') is-invalid @enderror " name="sourceFinancement" value="{{old('sourceFinancement',"Cotisations des membres, Ministère de l'action sociale et de la solidarité nationale, Correspondants.")}}" placeholder="Renseignez les sources de financement séparées par des virgules">
+            <input  required aria-describedby="errorSourceFinancement" type="text" class="form-control @error('sourceFinancement') is-invalid @enderror " name="sourceFinancement" value="{{old('sourceFinancement',"Cotisations des membres, Ministère de l'action sociale et de la solidarité nationale, Correspondants.")}}" placeholder="Renseignez les sources de financement séparées par des points">
             @error('sourceFinancement')
             <small class="form-text text-danger" id='errorSourceFinancement'>
                 {{$errors->first('sourceFinancement')}}
@@ -205,7 +205,7 @@
          <!--Partenaires-->
          <div class="form-group">
             <label for="partenaire">Partenaires <span class="text text-danger">*</span> </label>
-            <input  required aria-describedby="errorPartenaire" type="text" class="form-control @error('partenaire') is-invalid @enderror " name="partenaire" value="{{old('partenaire',"Partenaires Italiens")}}" placeholder="Renseignez les partenaires séparés par des virgules">
+            <input  required aria-describedby="errorPartenaire" type="text" class="form-control @error('partenaire') is-invalid @enderror " name="partenaire" value="{{old('partenaire',"Partenaires Italiens")}}" placeholder="Renseignez les partenaires séparés par des points">
             @error('partenaire')
             <small class="form-text text-danger" id='partenaire'>
                 {{$errors->first('partenaire')}}
@@ -432,7 +432,7 @@
         <!--Zone d'intervention-->
                  <div class="form-group">
                     <label for="zoneInt">Zone d'intervention <span class="text text-danger">*</span> </label>
-                    <input  required aria-describedby="errorZoneInt" type="text" class="form-control @error('zoneInt') is-invalid @enderror " name="zoneInt" value="{{old('zoneInt',"Kéra")}}" placeholder="Listez les zones d'intervention séparées par des virguless">
+                    <input  required aria-describedby="errorZoneInt" type="text" class="form-control @error('zoneInt') is-invalid @enderror " name="zoneInt" value="{{old('zoneInt',"Kéra")}}" placeholder="Listez les zones d'intervention séparées par des pointss">
                     @error('zoneInt')
                     <small class="form-text text-danger" id='errorActivite'>
                         {{$errors->first('zoneInt')}}
