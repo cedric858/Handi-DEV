@@ -4,7 +4,7 @@
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
-    <li class="breadcrumb-item"><a href="admin/type handicap">Liste des type handicap</a></li>
+    <li class="breadcrumb-item"><a href="{{route('typehandicaps.index')}}">Liste des type handicap</a></li>
     <li class="breadcrumb-item active">Détails type handicap</li>
 
 @endsection
@@ -44,8 +44,11 @@
                                 class="form-control @error('libelle') is-invalid @enderror "
                                  name="libelle" value="{{$item->libelle}}" disabled>
                             </div>
+                            <div class="form-group">
+                            <textarea name="description" id="" cols="30" rows="10" disabled>{{$item->description}}</textarea>
+                            </div>
                         </form>
-                        <a href="{{route('type handicap.edit',$item->id)}}" class="btn btn-warning" title="Modifier"><i class="fas fa-pencil"></i> Modifier</a>
+                        <a href="{{route('typehandicaps.edit',$item->id)}}" class="btn btn-warning" title="Modifier"><i class="fas fa-pencil"></i> Modifier</a>
 
                 </div>
             </div>

@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class TypeHandicap extends Model
 {
+    
+
+    
+    
     protected $fillable = ['libelle','description'];
+
     
     public function ophs()
     {

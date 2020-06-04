@@ -52,11 +52,16 @@ class TypeHandicapController extends Controller
      * @param  \App\TypeHandicap  $typeHandicap
      * @return \Illuminate\Http\Response
      */
-    public function show(TypeHandicap $typeHandicap)
+    public function show(TypeHandicap $typehandicap)
     {
+        dd($typehandicap);
+        
         $active = 'handicap';
         
-        $item = TypeHandicap::findOrFail($typeHandicap)->first();
+        $item = TypeHandicap::findOrFail($typehandicap);
+        dd($item);
+        
+        
         
         
         return view('handi-admin.admintypehandicap.show',compact('active','item'));
@@ -69,7 +74,7 @@ class TypeHandicapController extends Controller
      * @param  \App\TypeHandicap  $typeHandicap
      * @return \Illuminate\Http\Response
      */
-    public function edit(TypeHandicap $typeHandicap)
+    public function edit( $typeHandicap)
     {
         $active = 'handicap';
         $item = TypeHandicap::findOrFail($typeHandicap)->first();
@@ -84,7 +89,7 @@ class TypeHandicapController extends Controller
      * @param  \App\TypeHandicap  $typeHandicap
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TypeHandicap $typeHandicap)
+    public function update(Request $request,  $typeHandicap)
     {
         $active = 'handicap';
         $letype = TypeHandicap::find($typeHandicap)->first();
@@ -103,7 +108,7 @@ class TypeHandicapController extends Controller
      * @param  \App\TypeHandicap  $typeHandicap
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TypeHandicap $typeHandicap)
+    public function destroy( $typeHandicap)
     {
         $letype = TypeHandicap::find($typeHandicap)->first();
 

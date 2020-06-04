@@ -14,7 +14,9 @@
             <h3>
                 Nombre de régions: {{$nbrItems}}
             </h3>
+<?php
 
+?>
 
         </div>
         <div class="col-sm-12 col-md-8 pl-3">

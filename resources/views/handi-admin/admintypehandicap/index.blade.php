@@ -58,15 +58,18 @@
             <h4 class="card-title">
                 {{$item->libelle}}
             </h4>
+            
 
         </div>
         <div class="card-body" >
             <div class="row ">
                 <div class="col-sm-8">
                     <a href="{{route('typehandicaps.show',$item->id)}}" 
+                        
                         class="btn btn-info" 
                         title="Voir détails"><i class="fas fa-eye"></i> Voir détails</a>
-                    <a href="{{route('typehandicaps.edit',$item->id)}}" class="btn btn-warning" title="Modifier"><i class="fas fa-pencil"></i> Modifier</a>
+                        
+                        <a href="{{route('typehandicaps.edit',$item->id)}}" class="btn btn-warning" title="Modifier"><i class="fas fa-pencil"></i> Modifier</a>
                     <form action="{{route('typehandicaps.destroy',$item->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
                                                 {{csrf_field()}}
                                                 <input type="hidden" name="_method" value="DELETE">

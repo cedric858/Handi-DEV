@@ -56,10 +56,11 @@ class DomaineController extends Controller
      * @param  \App\Domaine  $domaine
      * @return \Illuminate\Http\Response
      */
-    public function show(Domaine $domaine)
+    public function show(Domaine $Domaine)
     {
+        dd($Domaine);   
         $active = "domaine";
-        $item = Domaine::findOrFail($domaine)->first();
+        $item = Domaine::findOrFail($Domaine)->first();
         
         return view('handi-admin.admindomaine.show',compact('active','item'));
     }
