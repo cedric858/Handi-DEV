@@ -17,6 +17,7 @@ class CommuneController extends Controller
      */
     public function index()
     {
+        $active = "communes";
         if(request('province'))
         {
             
@@ -34,11 +35,11 @@ class CommuneController extends Controller
         $nbrItems = DB::table('communes')->count();
         if(isset($province))
         {
-            return view('handi-admin.admincommune.index',compact('items','nbrItems','province'));
+            return view('handi-admin.admincommune.index',compact('active','items','nbrItems','province'));
 
 
         }
-     return view('handi-admin.admincommune.index',compact('items','nbrItems'));
+     return view('handi-admin.admincommune.index',compact('active','items','nbrItems'));
     }
 
     /**
@@ -48,8 +49,9 @@ class CommuneController extends Controller
      */
     public function create()
     {
+        $active = "communes";
         return view('handi-admin.admincommune.add',
-        ['provinces'=>Province::all()->sortBy("libelle")
+        ['active'=>$active,'provinces'=>Province::all()->sortBy("libelle")
         ]);
     }
 
@@ -61,8 +63,9 @@ class CommuneController extends Controller
      */
     public function store(CommuneRequest $request)
     {
+        $active = "communes";
         Commune::create($request->validated());
-        return redirect()->route('communes.index')->with('success','Commune ajoutée avec succès');
+        return redirect()->route('communes.index',['active'=>$active])->with('success','Commune ajoutée avec succès');
     }
 
     /**
@@ -73,7 +76,9 @@ class CommuneController extends Controller
      */
     public function show(Commune $commune)
     {
-        //
+        dd($commune);
+        $active = "communes";
+        return view('handi-admin.admincommune.show', compact('active','commune'));
     }
 
     /**
@@ -84,7 +89,14 @@ class CommuneController extends Controller
      */
     public function edit(Commune $commune)
     {
-        //
+        
+         $provinces= Province::all()->sortBy("libelle");
+
+        $active = "communes";
+        
+        
+        return view('handi-admin.admincommune.edit',['active'=>$active,'commune'=>$commune,
+        'provinces'=>$provinces]);
     }
 
     /**
@@ -94,9 +106,16 @@ class CommuneController extends Controller
      * @param  \App\Commune  $commune
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Commune $commune)
+    public function update(CommuneRequest $request, Commune $commune)
     {
-        //
+        $active = "communes";
+        $valid = $request->validated();
+        $commune->province_id = $valid['province_id']; 
+
+        $commune->libelle = $valid['libelle'];
+        
+        $commune->save();
+        return redirect()->route('communes.index',['active'=>$active])->with('success','Commune modifiée avec succès');
     }
 
     /**
@@ -107,6 +126,9 @@ class CommuneController extends Controller
      */
     public function destroy(Commune $commune)
     {
-        //
+        $active = "communes";
+        //$item = Region::find($commune)->first();
+        $commune->delete();
+        return redirect()->route('communes.index',['active'=>$active])->with('Success','Commune supprimée avec succès');
     }
 }

@@ -517,7 +517,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('communes.index')}}" class="nav-link @if(isset($active) && $active == "commune") active  @endif ">
+            <a href="{{route('communes.index')}}" class="nav-link @if(isset($active) && $active == "communes") active  @endif ">
               <i class="fas fa-circle"></i>
               <p>Gérer les Communes</p>
             </a>
@@ -525,7 +525,7 @@
 
 
           <li class="nav-item">
-            <a href="{{route('langues.index')}}" class="nav-link @if(isset($active) && $active == "langue") active  @endif ">
+            <a href="{{route('langues.index')}}" class="nav-link @if(isset($active) && $active == "langues") active  @endif ">
               <i class="fas fa-language"></i>
               <p>Gérer les langues</p>
             </a>

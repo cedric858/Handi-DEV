@@ -16,11 +16,11 @@ class LangueController extends Controller
      */
     public function index()
     {
-        
+        $active = "langues";
 
       $items = Langue::orderBy("libelle")->paginate(config('app.nbr_page'));
       $nbrItems = DB::table('langues')->count();
-   return view('handi-admin.adminlangue.index',compact('items','nbrItems'));    }
+   return view('handi-admin.adminlangue.index',compact('active','items','nbrItems'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +29,9 @@ class LangueController extends Controller
      */
     public function create()
     {
-        return view('handi-admin.adminlangue.add');
+        $active = "langues";
+
+        return view('handi-admin.adminlangue.add',compact('active'));
 
     }
 
@@ -41,8 +43,10 @@ class LangueController extends Controller
      */
     public function store(LangueRequest $request)
     {
+        $active = "langues";
+
         Langue::create($request->validated());
-        return redirect()->route('langues.index')->with('success','Langue ajoutée avec succès');
+        return redirect()->route('langues.index',['active'=>$active])->with('success','Langue ajoutée avec succès');
         }
 
     /**
@@ -53,9 +57,11 @@ class LangueController extends Controller
      */
     public function show(Langue $langue)
     {
+        $active = "langues";
+
         $item = Langue::findOrFail($langue)->first();
         
-        return view('handi-admin.adminlangue.show',compact('item'));
+        return view('handi-admin.adminlangue.show',compact('active','item'));
 
     }
 
@@ -68,8 +74,9 @@ class LangueController extends Controller
     public function edit(Langue $langue)
     {
         $item = Langue::findOrFail($langue)->first();
-        
-        return view('handi-admin.adminlangue.edit',compact('item'));
+        $active = "langues";
+
+        return view('handi-admin.adminlangue.edit',compact('active','item'));
     }
 
     /**
@@ -81,6 +88,8 @@ class LangueController extends Controller
      */
     public function update(Request $request, Langue $langue)
     {
+        $active = "langues";
+
         $lalangue = langue::find($langue)->first();
 
         $lalangue->libelle = request('libelle');
@@ -88,7 +97,7 @@ class LangueController extends Controller
         $lalangue->save();
         
         //$langue->update($request->validated());
-        return redirect()->route('langues.index')->with('success','langue modifiée avec succès');
+        return redirect()->route('langues.index',["active"=>$active])->with('success','Langue modifiée avec succès');
     }
 
     /**
@@ -99,9 +108,11 @@ class LangueController extends Controller
      */
     public function destroy(Langue $langue)
     {
+        $active = "langues";
+
         $lalangue = Langue::find($langue)->first();
 
         $lalangue->delete();
-        return redirect()->route('langues.index')->with('Success','langue supprimée avec succès');
+        return redirect()->route('langues.index',['active'=>$active])->with('Success','Langue supprimée avec succès');
     }
 }

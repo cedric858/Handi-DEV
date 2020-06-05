@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('header')
-    Modification province
+Mise à jour de <strong>{{ $commune->libelle }}</strong>
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
-    <li class="breadcrumb-item"><a href="{{route('provinces.index')}}">Liste provinces</a></li>
-    <li class="breadcrumb-item active">Modification province</li>
+    <li class="breadcrumb-item"><a href="{{route('communes.index')}}">Liste des communes</a></li>
+    <li class="breadcrumb-item active">Mise à jour de <strong>{{ $commune->libelle }}</strong></li>
 
 @endsection
 
@@ -13,76 +13,61 @@
 <div class="card">
         <div class="card-header">
             <h4 class="card-title">
-                {{$province->libelle}}
+                Mise à jour
                           </h4>
 
         </div>
         <div class="card-body" >
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8 col-offset-2">
-            <div class="card">
-                <div class="card-header">
-                    <h3> <i class="fas fa-"></i> Les détails</h3>
+            <form action="{{route('communes.update',$commune->id)}}" method="post">
+                @csrf
+                @method('PUT')
 
+                <!--Liste des provinces-->
+                <div class="form-group">
+                    <label for="province_id">Régions <span class="text text-danger">*</span> </label>
+                    <select class="form-control" id="province_id" name="province_id">
+        
+                   
+                        @forelse ($provinces as $province)
+                            <option value="{{$province->id}}" <?php
+                            if($province->libelle == $commune->province->libelle)
+                            {
+                                ?>
+                                selected
+
+                                <?php
+                            }
+                            ?> >{{$province->libelle}}</option>
+                            
+                        @empty
+                            <p class="badge badge-danger">Pas de provinces</p>
+                            
+                        @endforelse 
+                    </select>
+        
+                            
+                       
+                      
+                      @error('province_id')
+                    <p class="help is-danger">{{$message}}</p>
+                        
+                          
+                      @enderror
+                          
+                  </div>
+        
+                <!--/.Liste des provinces-->
+               
+
+                <div class="form-group">
+                    <label for="libelle">Libellé:</label> 
+                    <input aria-describedby="errorlibelle" type="text" 
+                    class="form-control "
+                     name="libelle" value="{{ old('libelle',$commune->libelle) }}"   >
                 </div>
-                <div class="card-body">
-                <form action="{{route('provinces.update',$province->id)}}" method="post">
-                            @csrf
-                            @method('PUT')
+                <input type="submit" value="Mettre à jour" class="btn btn-warning">
+            </form>
 
-                            <!--Liste des régions-->
-                            <div class="form-group">
-                                <label for="cheflieu_id">Régions <span class="text text-danger">*</span> </label>
-                                <select class="form-control" id="cheflieu_id" name="cheflieu_id">
-                    
-                               
-                                    @forelse ($cheflieus as $cheflieu)
-                                        <option value="{{$cheflieu->id}}" <?php
-                                        if($cheflieu->libelle == $province->cheflieu->libelle)
-                                        {
-                                            ?>
-                                            selected
-
-                                            <?php
-                                        }
-                                        ?> >{{$cheflieu->libelle}}</option>
-                                        
-                                    @empty
-                                        <p class="badge badge-danger">Pas de chef-lieu</p>
-                                        
-                                    @endforelse 
-                                </select>
-                    
-                                        
-                                   
-                                  
-                                  @error('cheflieu_id')
-                                <p class="help is-danger">{{$message}}</p>
-                                    
-                                      
-                                  @enderror
-                                      
-                              </div>
-                    
-                            <!--/.Liste des régions-->
-                           
-
-                            <div class="form-group">
-                                <label for="libelle">Libellé:</label> 
-                                <input aria-describedby="errorlibelle" type="text" 
-                                class="form-control "
-                                 name="libelle" value="{{$province->libelle}}"   >
-                            </div>
-                            <input type="submit" value="Mettre à jour" class="btn btn-warning">
-
-
-
-                        </form>
-
-                </div>
-            </div>
         </div>
     </div>
 @endsection

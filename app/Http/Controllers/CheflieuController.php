@@ -119,7 +119,7 @@ class CheflieuController extends Controller
         $cheflieus->save();
         
         //$domaine->update($request->validated());
-        return redirect()->route('cheflieus.index',['active'=>$active])->with('success','chef-lieu modifié avec succès');
+        return redirect()->route('cheflieus.index',['active'=>$active])->with('success','Chef-lieu modifié avec succès');
     }
 
     /**
@@ -140,7 +140,7 @@ class CheflieuController extends Controller
         }
 
         $cheflieus->delete();
-        return redirect()->route('cheflieus.index',['active'=>$active])->with('Success','chef-lieu supprimé avec succès');
+        return redirect()->route('cheflieus.index',['active'=>$active])->with('Success','Chef-lieu supprimé avec succès');
 
     }
 }
