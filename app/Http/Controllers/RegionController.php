@@ -19,10 +19,11 @@ class RegionController extends Controller
         
 
         ///////////////////////////
+        $active = "regions";
 
         $items = Region::orderBy("libelle")->paginate(config('app.nbr_page'));
         $nbrItems = DB::table('regions')->count();
-     return view('handi-admin.adminregion.index',compact('items','nbrItems'));
+     return view('handi-admin.adminregion.index',compact('items','nbrItems',"active"));
     }
 
     /**
@@ -32,7 +33,8 @@ class RegionController extends Controller
      */
     public function create()
     {
-        return view('handi-admin.adminregion.add');
+        $active = "regions";
+        return view('handi-admin.adminregion.add',compact('active'));
     }
 
     /**
@@ -43,10 +45,11 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
+        $active = "regions";
         Region::create($request->validate([
             'libelle'=>'required'
         ]));
-        return redirect()->route('regions.index')->with('success','Région ajouté avec succès');
+        return redirect()->route('regions.index',["active"=>$active])->with('success','Région ajouté avec succès');
     }
 
     /**
@@ -57,11 +60,12 @@ class RegionController extends Controller
      */
     public function show(Region $region)
     {
+        $active = "regions";
         
         $item = Region::findOrFail($region)->first();
         
         
-        return view('handi-admin.adminregion.show',compact('item'));
+        return view('handi-admin.adminregion.show',compact("active",'item'));
     }
 
     /**
@@ -72,10 +76,11 @@ class RegionController extends Controller
      */
     public function edit(Region $region)
     {
+        $active = "regions";
 
         $item = Region::findOrFail($region)->first();
         
-        return view('handi-admin.adminregion.edit',compact('item'));
+        return view('handi-admin.adminregion.edit',compact("active",'item'));
     }
 
     /**
@@ -87,6 +92,7 @@ class RegionController extends Controller
      */
     public function update(RegionRequest $request, Region $region)
     {
+        $active = "regions";
         $item = Region::find($region)->first();
 
         $item->libelle = request('libelle');
@@ -94,7 +100,7 @@ class RegionController extends Controller
         $item->save();
         
         //$domaine->update($request->validated());
-        return redirect()->route('regions.index')->with('success','Région modifié avec succès');
+        return redirect()->route('regions.index',['active'=>$active])->with('success','Région modifié avec succès');
     }
 
     /**
@@ -105,15 +111,16 @@ class RegionController extends Controller
      */
     public function destroy(Region $region)
     {
+        $active = "regions";
         $item = Region::find($region)->first();
         if( $item->cheflieu()->count() > 0)
         {
-            return redirect()->route('regions.index')
+            return redirect()->route('regions.index',['active'=>$active])
             ->with('error','Veuillez supprimer d"abord le chef-lieu de cette région');
 
         }
 
         $item->delete();
-        return redirect()->route('regions.index')->with('Success','Région supprimée avec succès');
+        return redirect()->route('regions.index',['active'=>$active])->with('Success','Région supprimée avec succès');
     }
 }

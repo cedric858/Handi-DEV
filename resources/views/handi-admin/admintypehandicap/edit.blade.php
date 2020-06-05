@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('header')
-    Détails régions
+Détails de <strong>{{ $item->libelle }}</strong>
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item"><a href="{{route('typehandicaps.index')}}">Liste des handicaps</a></li>
-    <li class="breadcrumb-item active">Détails des handicaps</li>
+    <li class="breadcrumb-item active">Détails de {{ $item->libelle }}</li>
 
 @endsection
 
@@ -31,7 +31,7 @@
         <div class="col-md-8 col-offset-2">
             <div class="card">
                 <div class="card-header">
-                    <h3> <i class="fas fa-"></i> Mise à jour des détails</h3>
+                    <h3> <i class="fas fa-"></i> Mise à jour </h3>
 
                 </div>
                 <div class="card-body">

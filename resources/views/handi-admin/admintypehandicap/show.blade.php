@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('header')
-    Détails type handicap
+    Détails de <strong>{{ $item->libelle }}</strong>  
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item"><a href="{{route('typehandicaps.index')}}">Liste des type handicap</a></li>
-    <li class="breadcrumb-item active">Détails type handicap</li>
+    <li class="breadcrumb-item active">Détails de {{ $item->libelle }}</li>
 
 @endsection
 

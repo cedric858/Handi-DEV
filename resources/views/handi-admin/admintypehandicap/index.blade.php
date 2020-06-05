@@ -1,3 +1,4 @@
+<?php $increment = 1 ?>
 @extends('layouts.admin')
 @section('header')
     Liste des handicaps
@@ -9,93 +10,108 @@
 @endsection
 
 @section('content')
- <div class="row no-gutters">
-        <div class="col-sm-12 col-md-4 bg-gradient-primary">
-            <h3>
-                Nombre de handicaps: {{$nbrItems}}
-            </h3>
+<!--Header typeHandicap-->
+<div class="row no-gutters">
+    <div class="col-sm-12 col-md-4">
+        <div class="card card-primary text-center">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Nombre de type de handicap 
+                </h3>
+                
 
+            </div>
+            <div class="card-body ">
+
+                <h3>
+                    {{$nbrItems}}
+                </h3>
+
+            </div>
+            <div class="card-footer">
+                <a href="{{route('typehandicaps.create')}}" class="btn btn-info" title="Ajouter un type de handicap"><i class="fas fa-plus"></i> En créer</a>
+
+            </div>
 
         </div>
-        <div class="col-sm-12 col-md-8 pl-3">
-            <h2 >Indication sur les types de handicaps</h2>
-            <p>Selon la définition de l’Organisation Mondiale de la Santé (OMS), « est handicapée toute personne dont l’intégrité physique ou mentale est passagèrement ou définitivement diminuée, soit congénitalement, soit sous l’effet de l’âge ou d’un accident, en sorte que son autonomie, son aptitude à fréquenter l’école ou à occuper un emploi s’en trouvent compromises ».On peut en répertorier en plusieurs types</p>
-            <a href="{{route('typehandicaps.create')}}" class="btn btn-info" title="Ajouter une région"><i class="fas fa-plus"></i> Ajouter</a>
+       
 
 
-        </div>
-            
     </div>
-    <!--/Header domaine-->
-    <!--Liste des domaines-->
-    <div class="row">
-        <div class="col-sm-12 mt-3">
-            <h3>
-                Liste des handicaps
-            </h3>
-            @if ($message = Session::get('success'))
-              <div class="alert alert-success alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>    
-                    <strong>{{ $message }}</strong>
-              </div>
-            @endif
-            @if ($message = Session::get('error'))
-              <div class="alert alert-danger alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>    
-                    <strong>{{ $message }}</strong>
-              </div>
-            @endif
+    <div class="col-sm-12 col-md-8 pl-3">
+        <h2 >Indication sur les types de handicaps</h2>
+        <p>Selon la définition de l’Organisation Mondiale de la Santé (OMS), « est handicapée toute personne dont l’intégrité physique ou mentale est passagèrement ou définitivement diminuée, soit congénitalement, soit sous l’effet de l’âge ou d’un accident, en sorte que son autonomie, son aptitude à fréquenter l’école ou à occuper un emploi s’en trouvent compromises ».On peut en répertorier en plusieurs types</p>
+        
 
-        </div>
+
     </div>
-    {{$items->links()}}
-    
-    
-@forelse($items as $item)
-
+        
+</div>
+<!--/Header TypeHandicap-->
+    <!--Liste des types de handicap-->
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">
-                {{$item->libelle}}
+               Liste des types de handicap
             </h4>
-            
 
         </div>
         <div class="card-body" >
-            <div class="row ">
-                <div class="col-sm-8">
-                    <a href="{{route('typehandicaps.show',$item->id)}}" 
-                        
-                        class="btn btn-info" 
-                        title="Voir détails"><i class="fas fa-eye"></i> Voir détails</a>
-                        
-                        <a href="{{route('typehandicaps.edit',$item->id)}}" class="btn btn-warning" title="Modifier"><i class="fas fa-pencil"></i> Modifier</a>
-                    <form action="{{route('typehandicaps.destroy',$item->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
-                                                {{csrf_field()}}
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button class="btn btn-danger">Supprimer</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Libellé du handicap
+                        </th>
+                        <th>
+                            Actions
+                        </th>
 
-                                            </form>
+                    </tr>
 
-                </div>
-            </div>
+                </thead>
+                <tbody>
+                    @forelse ($items as $item)
+                    <tr>
+                        <td>
+                            {{ $increment }}
+                        </td>
+                        <td>
+                            {{ $item->libelle }}
+                        </td>
+                        <td>
+                            <a href="{{route('typehandicaps.show',$item->id)}}" class="btn btn-info">
+                                <i class="fas fa-eye"></i> Voir détails
+                            </a>
+                            <a href="{{route('typehandicaps.edit',$item->id)}}" class="btn btn-warning">
+                                <i class="fas fa-pencil-alt"></i> Modifier
+                            </a>
+                           
+                              <form action="{{route('typehandicaps.destroy',$item->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger"><i class="fa fa-pencil"></i>  Supprimer</button>
+                
+                            </form>
+                        </td>
+                    </tr>
+                    <?php $increment +=1 ?>
+                    @empty
+                    <p class="badge badge-danger" >Pas de type de handicap</p>
+                        
+                    @endforelse
+
+
+                </tbody>
+                <tfoot>
+                    {{$items->links()}}
+
+                </tfoot>
+            </table>
         </div>
     </div>
-        
-        @empty
-    <span class="badge badge-danger">
-                       Pas de handicaps
-    </span>
-                  <a href="{{route('typehandicaps.create')}}" class="btn btn-info" title="Ajouter une région"><i class="fas fa-plus"></i>En créer</a>
-
-@endforelse
-{{$items->links()}}
-    
-
-        
-        
-
-
-
-
+    <!--/Liste des types de handicap-->
 @endsection

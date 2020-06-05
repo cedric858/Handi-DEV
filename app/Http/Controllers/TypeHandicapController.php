@@ -49,17 +49,17 @@ class TypeHandicapController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\TypeHandicap  $typeHandicap
+     * @param  \App\TypeHandicap  $typehandicap
      * @return \Illuminate\Http\Response
      */
     public function show(TypeHandicap $typehandicap)
     {
-        dd($typehandicap);
+        
         
         $active = 'handicap';
         
-        $item = TypeHandicap::findOrFail($typehandicap);
-        dd($item);
+        $item = TypeHandicap::findOrFail($typehandicap)->first();
+        
         
         
         
@@ -71,13 +71,13 @@ class TypeHandicapController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\TypeHandicap  $typeHandicap
+     * @param  \App\TypeHandicap  $typehandicap
      * @return \Illuminate\Http\Response
      */
-    public function edit( $typeHandicap)
+    public function edit( TypeHandicap $typehandicap)
     {
         $active = 'handicap';
-        $item = TypeHandicap::findOrFail($typeHandicap)->first();
+        $item = TypeHandicap::findOrFail($typehandicap)->first();
         
         return view('handi-admin.admintypehandicap.edit',compact('active','item'));
     }
@@ -86,13 +86,14 @@ class TypeHandicapController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TypeHandicap  $typeHandicap
+     * @param  \App\TypeHandicap  $typehandicap
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $typeHandicap)
+    public function update(Request $request, TypeHandicap $typehandicap)
     {
         $active = 'handicap';
-        $letype = TypeHandicap::find($typeHandicap)->first();
+        $letype = TypeHandicap::find($typehandicap)->first();
+        
 
         $letype->libelle = request('libelle');
         $letype->description = request('description');
@@ -105,12 +106,12 @@ class TypeHandicapController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TypeHandicap  $typeHandicap
+     * @param  \App\TypeHandicap  $typehandicap
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $typeHandicap)
+    public function destroy( TypeHandicap $typehandicap)
     {
-        $letype = TypeHandicap::find($typeHandicap)->first();
+        $letype = TypeHandicap::find($typehandicap)->first();
 
         $letype->delete();
         $active = 'handicap';

@@ -312,7 +312,7 @@ $increment3 = 1;
          <!--/.Card nombre OPH-->
          <!--card list OPH--> 
          <div class="col-sm-12 col-md-8">
-           <table>
+           <table class="table">
              <thead>
                <tr>
                  <th>

@@ -498,7 +498,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('regions.index')}}" class="nav-link @if(isset($active) && $active == "region") active  @endif ">
+            <a href="{{route('regions.index')}}" class="nav-link @if(isset($active) && $active == "regions") active  @endif ">
               <i class="fas fa-landmark"></i>
               <p>Gérer les régions</p>
             </a>

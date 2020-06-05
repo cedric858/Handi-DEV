@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('header')
-    Liste des handicaps-Ajout
+    Ajout d'un type de handicap
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
-    <li class="breadcrumb-item"><a href="{{route('typehandicaps.index')}}">Liste des typehandicaps</a></li>
-    <li class="breadcrumb-item active">Liste des typehandicaps-ajout</li>
+    <li class="breadcrumb-item"><a href="{{route('typehandicaps.index')}}">Liste des type de handicaps</a></li>
+    <li class="breadcrumb-item active">Ajout d'un type de handicap</li>
 
 @endsection
 
