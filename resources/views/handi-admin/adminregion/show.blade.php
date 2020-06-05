@@ -1,16 +1,17 @@
 @extends('layouts.admin')
 @section('header')
-    Détails région
+    Détails de <strong>{{ $item->libelle }}</strong> 
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item"><a href="{{route('regions.index')}}">Liste régions</a></li>
-    <li class="breadcrumb-item active">Détails régions</li>
+    <li class="breadcrumb-item active">Détails de {{ $item->libelle }}</li>
 
 @endsection
 
 @section('content')
-<div class="card">
+<div class="col-sm-4 text-center">
+    <div class="card card-primary">
         <div class="card-header">
             <h4 class="card-title">
                 {{$item->libelle}}
@@ -18,24 +19,23 @@
 
         </div>
         <div class="card-body" >
-            <div class="row ">
-                <div class="col-sm-4 bg-success">
+            
+               
                     <p>
-                        Nombre de chef lieux:
-                        {{$item->cheflieu()->count()}}
-                    </p>  
-                 </div>
-                <div class="col-sm-8">
-                    <h5 class="card-title">{{$item->description?$item->description:"Pas de description"}}</h5>
-                    <p class="card-text">
-
+                        Nombre de chef-lieux de cette région:
                     </p>
-                    <a href="admin/cheflieus/#{{$item->id}}" class="btn btn-info" title="Aller au chef lieux"><i class="fas fa-arrow-circle-right"></i> Allez aux chef-lieux</a>
+                    <h3>{{$item->cheflieu()->count()}}</h3>
+                        
+                     
+                    <a href="{{route('cheflieus.index',['region'=>$item->id])}}" class="btn btn-info" title="Aller au chef-lieux"><i class="fas fa-arrow-circle-right"></i> Allez aux chef-lieux</a>
 
-                </div>
-            </div>
+                
+            
         </div>
     </div>
+
+</div>
+
     <div class="row">
         <div class="col-md-8 col-offset-2">
             <div class="card">

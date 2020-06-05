@@ -33,7 +33,7 @@
                     <a href="{{route('indicateurs.create')}}" class="btn btn-info" title="Créer un indicateur"><i class="fas fa-plus"></i> En créer</a>
                     
                 @else
-                <a href="{{route('indicateurs.list')}}" class="btn btn-info" title="Voir les indicateurs de ce domaine"><i class="fas fa-plus"></i> Aller aux indicateurs</a>
+                <a href="{{route('indicateurs.index')}}" class="btn btn-info" title="Voir les indicateurs de ce domaine"><i class="fas fa-plus"></i> Aller aux indicateurs</a>
                     
                 @endif
                 

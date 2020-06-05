@@ -22,6 +22,7 @@ class RegionController extends Controller
         $active = "regions";
 
         $items = Region::orderBy("libelle")->paginate(config('app.nbr_page'));
+        
         $nbrItems = DB::table('regions')->count();
      return view('handi-admin.adminregion.index',compact('items','nbrItems',"active"));
     }
@@ -92,10 +93,12 @@ class RegionController extends Controller
      */
     public function update(RegionRequest $request, Region $region)
     {
+        $validatedRegion = $request->validated();
         $active = "regions";
+
         $item = Region::find($region)->first();
 
-        $item->libelle = request('libelle');
+        $item->libelle = $validatedRegion['libelle'];
         
         $item->save();
         

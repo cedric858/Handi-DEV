@@ -504,14 +504,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('cheflieus.index')}}" class="nav-link @if(isset($active) && $active == "cheflie") active  @endif ">
+            <a href="{{route('cheflieus.index')}}" class="nav-link @if(isset($active) && $active == "cheflieu") active  @endif ">
               <i class="far fa-building"></i>
               <p>Gérer les chef-lieux</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{route('provinces.index')}}" class="nav-link @if(isset($active) && $active == "province") active  @endif ">
+            <a href="{{route('provinces.index')}}" class="nav-link @if(isset($active) && $active == "provinces") active  @endif ">
               <i class="fas fa-hotel"></i>
               <p>Gérer les provinces</p>
             </a>

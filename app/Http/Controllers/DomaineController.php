@@ -58,7 +58,7 @@ class DomaineController extends Controller
      */
     public function show(Domaine $Domaine)
     {
-        dd($Domaine);   
+         
         $active = "domaine";
         $item = Domaine::findOrFail($Domaine)->first();
         

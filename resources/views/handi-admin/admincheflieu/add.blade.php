@@ -47,7 +47,7 @@
           </div>
 <!--Région-->
 
-<!--/.Chef lieu-->
+<!--/.chef-lieu-->
 
                             <div class="form-group">
                                 <label for="libelle"  >Libellé:<span class="text text-danger">*</span></label> 

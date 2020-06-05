@@ -16,6 +16,7 @@ class CheflieuController extends Controller
      */
     public function index()
     {
+        $active = "cheflieu";
         if(request('region'))
         {
             
@@ -33,11 +34,11 @@ class CheflieuController extends Controller
         $nbrItems = DB::table('cheflieus')->count();
         if(isset($region))
         {
-            return view('handi-admin.admincheflieu.index',compact('items','nbrItems','region'));
+            return view('handi-admin.admincheflieu.index',compact("active",'items','nbrItems','region'));
 
 
         }
-     return view('handi-admin.admincheflieu.index',compact('items','nbrItems'));
+     return view('handi-admin.admincheflieu.index',compact('active','items','nbrItems'));
     }
 
     /**
@@ -47,7 +48,8 @@ class CheflieuController extends Controller
      */
     public function create()
     {
-        return view('handi-admin.admincheflieu.add',['regions'=>Region::all()->sortBy("libelle")
+        $active = "cheflieu";
+        return view('handi-admin.admincheflieu.add',['active'=>$active,'regions'=>Region::all()->sortBy("libelle")
         ]);
     }
 
@@ -59,8 +61,9 @@ class CheflieuController extends Controller
      */
     public function store(CheflieuRequest $request)
     {
+        $active = "cheflieu";
         Cheflieu::create($request->validated());
-        return redirect()->route('cheflieus.index')->with('success','Chef-lieu ajouté avec succès');
+        return redirect()->route('cheflieus.index',['active'=>$active])->with('success','Chef-lieu ajouté avec succès');
     }
 
     /**
@@ -71,9 +74,10 @@ class CheflieuController extends Controller
      */
     public function show(Cheflieu $cheflieus)
     {
+        $active = "cheflieu";
         $cheflieu =$cheflieus;
         
-         return view('handi-admin.admincheflieu.show', compact('cheflieu'));
+         return view('handi-admin.admincheflieu.show', compact('active','cheflieu'));
     }
 
     /**
@@ -84,10 +88,11 @@ class CheflieuController extends Controller
      */
     public function edit(Cheflieu $cheflieus)
     {
+        $active = "cheflieu";
         $cheflieu =$cheflieus;
          $regions= Region::all()->sortBy("libelle");
         
-        return view('handi-admin.admincheflieu.edit',compact('cheflieu','regions'));
+        return view('handi-admin.admincheflieu.edit',compact('active','cheflieu','regions'));
     }
 
     /**
@@ -99,6 +104,7 @@ class CheflieuController extends Controller
      */
     public function update(CheflieuRequest $request, Cheflieu $cheflieus)
     {
+        $active = "cheflieu";
         $valid = $request->validated();
         
         //return redirect()->route('cheflieus.index')->with('success','Chef-lieu ajouté avec succès');
@@ -113,7 +119,7 @@ class CheflieuController extends Controller
         $cheflieus->save();
         
         //$domaine->update($request->validated());
-        return redirect()->route('cheflieus.index')->with('success','Chef lieu modifié avec succès');
+        return redirect()->route('cheflieus.index',['active'=>$active])->with('success','chef-lieu modifié avec succès');
     }
 
     /**
@@ -124,16 +130,17 @@ class CheflieuController extends Controller
      */
     public function destroy(Cheflieu $cheflieus)
     {
+        $active = "cheflieu";
         //$item = Region::find($cheflieus)->first();
         if( $cheflieus->provinces->count() > 0)
         {
-            return redirect()->route('cheflieus.index')
-            ->with('error','Veuillez supprimer d"abord les provinces de ce chef lieu');
+            return redirect()->route('cheflieus.index',['active'=>$active])
+            ->with('error','Veuillez supprimer d"abord les provinces de ce chef-lieu');
 
         }
 
         $cheflieus->delete();
-        return redirect()->route('cheflieus.index')->with('Success','Chef lieu supprimé avec succès');
+        return redirect()->route('cheflieus.index',['active'=>$active])->with('Success','chef-lieu supprimé avec succès');
 
     }
 }

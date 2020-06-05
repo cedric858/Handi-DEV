@@ -1,42 +1,55 @@
 @extends('layouts.admin')
 @section('header')
-    Détails Chef lieu
+    Détails de <strong>{{ $cheflieu->libelle }}</strong> 
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item"><a href="{{route('cheflieus.index')}}">Liste chefs-lieux</a></li>
-    <li class="breadcrumb-item active">Détails province</li>
+    <li class="breadcrumb-item active">Détails de {{ $cheflieu->libelle }}</li>
 
 @endsection
 
 @section('content')
-<div class="card">
-        <div class="card-header">
-            <h4 class="card-title">
-                {{$cheflieu->libelle}}
-                          </h4>
+<!--Header de chef-lieu-->
+<div class="row no-gutters">
+    <div class="col-sm-12 col-md-4">
+        <div class="card card-primary text-center">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Nombre de provinces dans ce chef-lieu
+                </h3>
 
-        </div>
-        <div class="card-body" >
-            <div class="row ">
-                <div class="col-sm-4 bg-success">
-                    <p>
-                        Nombre de Province:
-                        
-                        {{-- {{$cheflieu->provinces->count()}} --}}
-                    </p>  
-                 </div>
-                <div class="col-sm-8">
 
-                    <p class="card-text">
-
-                    </p>
-                    <a href="admin/cheflieus/#{{$cheflieu->id}}" class="btn btn-info" title="Aller au chef lieux"><i class="fas fa-arrow-circle-right"></i> Allez aux chef-lieux</a>
-
-                </div>
             </div>
+            <div class="card-body ">
+
+                <h3>
+                    {{$cheflieu->provinces->count()}}
+                </h3>
+
+            </div>
+            <div class="card-footer">
+                @if ($cheflieu->provinces->count() == 0)
+                    <a href="{{route('provinces.create')}}" class="btn btn-info" title="Créer un indicateur"><i class="fas fa-plus"></i> En créer</a>
+                    
+                @else
+                <a href="{{route('provinces.index',['cheflieu'=>$cheflieu->id])}}" class="btn btn-info" title="Voir les provinces de ce domaine"><i class="fas fa-plus"></i> Aller aux provinces</a>
+                    
+                @endif
+                
+
+            </div>
+
         </div>
+       
+
+
     </div>
+
+        
+</div>
+<!--/.header de chef lieu-->
+
     <div class="row">
         <div class="col-md-8 col-offset-2">
             <div class="card">

@@ -1,25 +1,39 @@
 @extends('layouts.admin')
 @section('header')
-    Modification province
+    Mise à jour de <strong>{{ $province->libelle }}</strong> 
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item"><a href="{{route('provinces.index')}}">Liste provinces</a></li>
-    <li class="breadcrumb-item active">Modification province</li>
+<li class="breadcrumb-item active">Mise à jour de {{ $province->libelle }}</li>
 
 @endsection
 
 @section('content')
-<div class="card">
+<div class="col-sm-4 text-center">
+    <div class="card card-primary">
         <div class="card-header">
             <h4 class="card-title">
                 {{$province->libelle}}
-                          </h4>
+            </h4>
 
         </div>
         <div class="card-body" >
+            
+               
+                    <p>
+                        Nombre de communes de cette province:
+                    </p>
+                    <h3>{{$province->communes()->count()}}</h3>
+                        
+                     
+                    <a href="{{route('communes.index',['region'=>$province->id])}}" class="btn btn-info" title="Aller aux communes"><i class="fas fa-arrow-circle-right"></i> Allez aux communes</a>
+
+                
+            
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-8 col-offset-2">
             <div class="card">

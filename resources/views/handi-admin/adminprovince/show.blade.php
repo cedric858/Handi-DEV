@@ -1,42 +1,40 @@
 @extends('layouts.admin')
 @section('header')
-    Détails province
+    Détails de <strong>{{ $province->libelle }}</strong> 
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     <li class="breadcrumb-item"><a href="{{route('provinces.index')}}">Liste provinces</a></li>
-    <li class="breadcrumb-item active">Détails province</li>
+    <li class="breadcrumb-item active">Détails de {{ $province->libelle }}</li>
 
 @endsection
 
 @section('content')
-<div class="card">
+<div class="col-sm-4 text-center">
+    <div class="card card-primary">
         <div class="card-header">
             <h4 class="card-title">
                 {{$province->libelle}}
-                          </h4>
+            </h4>
 
         </div>
         <div class="card-body" >
-            <div class="row ">
-                <div class="col-sm-4 bg-success">
+            
+               
                     <p>
-                        Nombre de communes:
-                        
-                        {{$province->communes->count()}}
-                    </p>  
-                 </div>
-                <div class="col-sm-8">
-
-                    <p class="card-text">
-
+                        Nombre de communes de cette province:
                     </p>
-                    <a href="admin/provinces/{{$province->id}}" class="btn btn-info" title="Aller au provincex"><i class="fas fa-arrow-circle-right"></i> Allez aux communes</a>
+                    <h3>{{$province->communes()->count()}}</h3>
+                        
+                     
+                    <a href="{{route('communes.index',['region'=>$province->id])}}" class="btn btn-info" title="Aller aux communes"><i class="fas fa-arrow-circle-right"></i> Allez aux communes</a>
 
-                </div>
-            </div>
+                
+            
         </div>
     </div>
+
+</div>
     <div class="row">
         <div class="col-md-8 col-offset-2">
             <div class="card">
@@ -48,7 +46,7 @@
                         <form action="" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="region_id">Chef lieu:</label> 
+                                <label for="region_id">chef-lieu:</label> 
                                 <input aria-describedby="errorregion_id" type="text" 
                                 class="form-control @error('cheflieu_id') is-invalid @enderror "
                                  name="region_id" value="{{$province->cheflieu->libelle}}" disabled>

@@ -104,10 +104,17 @@ $increment = 1;
 
                         </td>
                         <td>
-                         
+                            @if ($item->cheflieu)
                             <a href="{{
                                 route('cheflieus.show',$item->cheflieu->id)
                             }}" title=" Voir {{ $item->cheflieu->libelle }} ">{{ $item->cheflieu->libelle }}</a>
+                                
+                            @else
+                            <p class="badge badge-danger">Pas de chef-lieu pour cette région pour le moment</p>
+                                
+                            @endif
+                         
+                            
                             
                         </td>
                         <td>
@@ -145,5 +152,4 @@ $increment = 1;
 
         </div>
     </div>
-
 @endsection

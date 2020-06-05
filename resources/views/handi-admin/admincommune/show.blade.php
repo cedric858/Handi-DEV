@@ -48,7 +48,7 @@
                         <form action="" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="region_id">Chef lieu:</label> 
+                                <label for="region_id">chef-lieu:</label> 
                                 <input aria-describedby="errorregion_id" type="text" 
                                 class="form-control @error('cheflieu_id') is-invalid @enderror "
                                  name="region_id" value="{{$province->cheflieu->libelle}}" disabled>

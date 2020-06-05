@@ -3,7 +3,7 @@
     Accueil
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="/admin">Accueil</a></li>
     @endsection
 @section('content')
 
@@ -386,7 +386,7 @@ $increment3 = 1;
     </h3>
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse">
-        <i class="fas fa-minus"></i>
+        <i class="fas fa-plus"></i>
       </button>
       <div class="btn-group">
         <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -404,7 +404,7 @@ $increment3 = 1;
 
   </div>
   <div class="card-body">
-    <!--Les region chef lieux -->
+    <!--Les region chef-lieux -->
     <div class="row">
       <!--col région-->
       <div class="col-sm-12 col-md-6 col-lg-3">
@@ -435,7 +435,7 @@ $increment3 = 1;
     
       </div>
       <!--/.col région-->
-      <!--col chef lieux-->
+      <!--col chef-lieux-->
       <div class="col-sm-12 col-md-6 col-lg-3">
         <div class="card card-primary">
           <div class="card-header">
@@ -462,7 +462,7 @@ $increment3 = 1;
         </div>
     
       </div>
-      <!--/.col chef lieu-->
+      <!--/.col chef-lieu-->
       <!--col provinces-->
       <div class="col-sm-12 col-md-6 col-lg-3">
         <div class="card card-primary">
@@ -520,10 +520,10 @@ $increment3 = 1;
         </div>
     
       </div>
-      <!--/.col chef lieu-->
+      <!--/.col chef-lieu-->
       
     </div>
-    <!--Les region chef lieux-->
+    <!--Les region chef-lieux-->
     <!--tableau-->
     <table class="table">
       <thead>
@@ -631,7 +631,7 @@ $increment3 = 1;
     </h3>
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse">
-        <i class="fas fa-minus"></i>
+        <i class="fas fa-plus"></i>
       </button>
       <div class="btn-group">
         <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -725,7 +725,7 @@ $increment3 = 1;
     </h3>
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse">
-        <i class="fas fa-minus"></i>
+        <i class="fas fa-plus"></i>
       </button>
       <div class="btn-group">
         <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">

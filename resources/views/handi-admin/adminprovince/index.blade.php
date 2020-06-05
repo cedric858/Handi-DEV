@@ -1,3 +1,4 @@
+<?php $increment = 1; ?>
 @extends('layouts.admin')
 @section('header')
     Liste des   provinces
@@ -9,110 +10,145 @@
 @endsection
 
 @section('content')
- <div class="row no-gutters">
-        <div class="col-sm-12 col-md-4 bg-gradient-primary">
-            <h3>
-                Nombre de   provinces: {{$nbrItems}}
-            </h3>
+<!--Header province-->
+<div class="row no-gutters">
+    <div class="col-sm-12 col-md-4">
+        <div class="card card-primary text-center">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Nombre de type de province
+                </h3>
+                
 
+            </div>
+            <div class="card-body ">
+
+                <h3>
+                    {{$nbrItems}}
+                </h3>
+
+            </div>
+            <div class="card-footer">
+                <a href="{{route('provinces.create')}}" class="btn btn-info" title="Ajouter une province"><i class="fas fa-plus"></i> En créer</a>
+
+            </div>
 
         </div>
-        <div class="col-sm-12 col-md-8 pl-3">
-            <h2 >Indication sur les   provinces du Burkina Faso</h2>
-            <p>Les provinces du Burkina Faso sont subdivisées en communes. Nous avons des communes rurales et des communes urbaines.</p>
-            <p>Les province font également partie des Chef lieux</p>
-            <a href="{{route('provinces.create')}}" class="btn btn-info" title="Ajouter une   province"><i class="fas fa-plus"></i> En créer</a>
+       
 
 
-        </div>
-            
     </div>
-    <!--/Header domaine-->
-    <!--Liste des domaines-->
-    <div class="row">
-        <div class="col-sm-12 mt-3">
-            <h3>
-                Liste des   provinces
-            </h3>
-            @if ($message = Session::get('success'))
-              <div class="alert alert-success alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>    
-                    <strong>{{ $message }}</strong>
-              </div>
-            @endif
-            @if ($message = Session::get('error'))
-              <div class="alert alert-danger alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>    
-                    <strong>{{ $message }}</strong>
-              </div>
-            @endif
+    <div class="col-sm-12 col-md-8 pl-3">
+        <h2 >Indication sur les provinces</h2>
+        <p>Les provinces du Burkina Faso sont subdivisées en communes. Nous avons des communes rurales et des communes urbaines.</p>
+            <p>Les province font également partie des chef-lieux</p>
+        
 
-        </div>
+
     </div>
-    <?php if(!isset($cheflieu))
-    {
-        ?>
-        {{$items->links()}}
-        <?php
-    } 
-    ?>
-    
-    
-    
-@forelse($items as $item)
+        
+</div>
 
-  
+    <!--Liste des provinces-->
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">
-                {{$item->libelle}}
+                Liste des provinces
+                {{$items->links()}}
+
             </h4>
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                  <button type="button" class="close" data-dismiss="alert">×</button>    
+                  <strong>{{ $message }}</strong>
+            </div>
+          @endif
+          @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                  <button type="button" class="close" data-dismiss="alert">×</button>    
+                  <strong>{{ $message }}</strong>
+            </div>
+          @endif
 
         </div>
-        <div class="card-body" >
-            <div class="row ">
-                <div class="col-sm-4 bg-success">
-                    <p>Nombre de communes dans cette province: {{$item->communes()->count()}}</p> 
-                 </div>
-                <div class="col-sm-8">
-                    <a href="{{route('provinces.show',$item->id)}}" 
-                        class="btn btn-info" 
-                        title="Voir détails"><i class="fas fa-eye"></i> Voir détails</a>
-                    <a href="{{route('provinces.edit',$item->id)}}" class="btn btn-warning" title="Modifier"><i class="fas fa-pencil"></i> Modifier</a>
-                    <form action="{{route('provinces.destroy',$item->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
-                                                {{csrf_field()}}
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button class="btn btn-danger">Supprimer</button>
+        <div class="card-body">
+            <table class="table" >
+                <thead>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Libellé
+                    </th>
+                    <th>
+                        Les communes
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </thead>
+                <tbody>
+                    @forelse ($items as $item)
+                    <tr>
+                        <th>
+                            {{ $increment }}
+                        </th>
+                        <td>
+                            {{ $item->libelle }}
+                        </td>
+                        <td>
+                            <ul>
+                                @forelse ($item->communes as $commune)
+                                <li>
+                                <a href="{{ route('communes.show',$commune->id) }}">
+                                    {{ $commune->libelle }}
+                                </a>
+                                    
+                                </li>
+                                
+                                @empty
+                                    <p class="badge badge-danger">
+                                        Pas de communes pour cette province
+                                    </p>
+                                
+                                @endforelse
 
-                                            </form>
+                            </ul>
+                            
+                        </td>
+                        <td>
+                            <a href="{{route('provinces.show',$item->id)}}" class="btn btn-info">
+                                <i class="fas fa-eye"></i> Voir détails
+                            </a>
+                            <a href="{{route('provinces.edit',$item->id)}}" class="btn btn-warning">
+                                <i class="fas fa-pencil-alt"></i> Modifier
+                            </a>
+                           
+                              <form action="{{route('provinces.destroy',$item->id)}}" method="post" style="display:inline" onsubmit="return confirm('Vous êtes sûr?');">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger"><i class="fa fa-pencil"></i>  Supprimer</button>
+                
+                            </form>
+                        </td>
+                    </tr>
+                    <?php $increment +=1; ?>
+                        
+                    @empty
+                        
+                    @endforelse
 
-                </div>
-            </div>
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+
+            </table>
+
+        </div>
+        <div class="card-footer">
+            {{$items->links()}}
+
         </div>
     </div>
-        
-        @empty
-    <span class="badge badge-danger">
-                       Pas de   provinces
-    </span>
-                  <a href="{{route('provinces.create')}}" class="btn btn-info" title="Ajouter un chef-lieu"><i class="fas fa-plus"></i>En créer</a>
-
-@endforelse
-<?php if(!isset($cheflieu))
-{
-    ?>
-    {{$items->links()}}
-
-    <?php
-} 
-
-?>
-
-
-        
-        
-
-
-
-
-@endsection
+    @endsection
