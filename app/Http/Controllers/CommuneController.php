@@ -76,7 +76,7 @@ class CommuneController extends Controller
      */
     public function show(Commune $commune)
     {
-        dd($commune);
+        
         $active = "communes";
         return view('handi-admin.admincommune.show', compact('active','commune'));
     }
